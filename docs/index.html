@@ -4,7 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RideResQ - Roadside Help, Instantly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --asphalt: #0d0d0f;
+            --concrete: #1a1a1e;
+            --steel: #2a2a32;
+            --amber: #ffb800;
+            --amber-glow: rgba(255, 184, 0, 0.15);
+            --headlight: #f0f0f0;
+            --fog: #888894;
+            --danger: #ff3b30;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,112 +26,281 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--asphalt);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            color: var(--headlight);
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Road texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(ellipse at 50% 0%, var(--amber-glow) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255,255,255,0.01) 2px,
+                    rgba(255,255,255,0.01) 4px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Animated road lines */
+        .road-lines {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100vh;
+            background: repeating-linear-gradient(
+                to top,
+                var(--amber) 0px,
+                var(--amber) 40px,
+                transparent 40px,
+                transparent 80px
+            );
+            opacity: 0.3;
+            animation: roadMove 2s linear infinite;
+        }
+        
+        @keyframes roadMove {
+            from { background-position: 0 0; }
+            to { background-position: 0 80px; }
         }
         
         .container {
             text-align: center;
-            max-width: 500px;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .logo {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #f39c12, #e74c3c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            letter-spacing: -2px;
+            margin-bottom: 0.25rem;
+            color: var(--headlight);
+            text-shadow: 0 0 60px var(--amber-glow);
+            animation: fadeUp 0.8s ease-out 0.1s both;
+        }
+        
+        .logo span {
+            color: var(--amber);
         }
         
         .tagline {
-            font-size: 1.25rem;
-            color: #a0a0a0;
-            margin-bottom: 3rem;
+            font-size: 0.85rem;
+            color: var(--fog);
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeUp 0.8s ease-out 0.2s both;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--concrete);
+            border: 1px solid var(--steel);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--fog);
+            margin-bottom: 2rem;
+            animation: fadeUp 0.8s ease-out 0.3s both;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #34c759;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         
         .help-text {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            line-height: 1.4;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            animation: fadeUp 0.8s ease-out 0.4s both;
+        }
+        
+        .help-sub {
+            color: var(--fog);
+            font-size: 0.9rem;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.8s ease-out 0.5s both;
         }
         
         .cta-phone {
             display: inline-block;
+            font-family: 'Archivo Black', sans-serif;
             font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-            background: linear-gradient(90deg, #f39c12, #e74c3c);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
+            color: var(--asphalt);
+            background: var(--amber);
+            padding: 1.25rem 3rem;
             text-decoration: none;
-            margin-bottom: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 20px rgba(243, 156, 18, 0.4);
+            position: relative;
+            transition: all 0.2s ease;
+            animation: fadeUp 0.8s ease-out 0.6s both;
+            clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
         }
         
         .cta-phone:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 30px rgba(243, 156, 18, 0.6);
+            background: var(--headlight);
+            transform: scale(1.02);
+            box-shadow: 0 0 40px var(--amber-glow);
+        }
+        
+        .cta-phone::before {
+            content: '📞';
+            margin-right: 12px;
         }
         
         .cta-sub {
-            font-size: 1rem;
-            color: #888;
+            font-size: 0.8rem;
+            color: var(--fog);
+            margin-top: 1.5rem;
             margin-bottom: 4rem;
-        }
-        
-        .business-link {
-            color: #f39c12;
-            text-decoration: none;
-            font-size: 0.95rem;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s;
-        }
-        
-        .business-link:hover {
-            border-bottom-color: #f39c12;
+            animation: fadeUp 0.8s ease-out 0.7s both;
         }
         
         .features {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
-            flex-wrap: wrap;
+            gap: 1px;
+            background: var(--steel);
+            border: 1px solid var(--steel);
+            animation: fadeUp 0.8s ease-out 0.8s both;
         }
         
         .feature {
+            background: var(--concrete);
+            padding: 1.5rem 2rem;
             text-align: center;
+            transition: background 0.2s ease;
+        }
+        
+        .feature:hover {
+            background: var(--steel);
         }
         
         .feature-icon {
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            filter: grayscale(1);
+            transition: filter 0.2s ease;
+        }
+        
+        .feature:hover .feature-icon {
+            filter: grayscale(0);
         }
         
         .feature-text {
-            font-size: 0.9rem;
-            color: #a0a0a0;
+            font-size: 0.7rem;
+            color: var(--fog);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .business-link {
+            margin-top: 4rem;
+            animation: fadeUp 0.8s ease-out 0.9s both;
+        }
+        
+        .business-link a {
+            color: var(--fog);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--steel);
+            transition: all 0.2s ease;
+        }
+        
+        .business-link a:hover {
+            color: var(--amber);
+            border-color: var(--amber);
+        }
+        
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .help-text {
+                font-size: 1.25rem;
+            }
+            
+            .cta-phone {
+                font-size: 1.5rem;
+                padding: 1rem 2rem;
+            }
+            
+            .features {
+                flex-wrap: wrap;
+            }
+            
+            .feature {
+                flex: 1 1 50%;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="road-lines"></div>
+    
     <div class="container">
-        <div class="logo">RideResQ</div>
+        <div class="logo">Ride<span>ResQ</span></div>
         <div class="tagline">Roadside help, instantly</div>
         
+        <div class="status">
+            <span class="status-dot"></span>
+            Denver Metro — Available 24/7
+        </div>
+        
         <div class="help-text">
-            Stuck on the road?<br>
-            Text or call us now.
+            Stuck on the road?
+        </div>
+        <div class="help-sub">
+            Text or call. We'll connect you with help in minutes.
         </div>
         
         <a href="tel:+17206500250" class="cta-phone">
@@ -125,12 +308,12 @@
         </a>
         
         <div class="cta-sub">
-            We'll connect you with help in minutes
+            Towing • Repairs • Jump starts • Lockouts
         </div>
         
         <div class="features">
             <div class="feature">
-                <div class="feature-icon">🚗</div>
+                <div class="feature-icon">🚛</div>
                 <div class="feature-text">Towing</div>
             </div>
             <div class="feature">
@@ -139,16 +322,16 @@
             </div>
             <div class="feature">
                 <div class="feature-icon">⚡</div>
-                <div class="feature-text">Jump starts</div>
+                <div class="feature-text">Jump Start</div>
             </div>
             <div class="feature">
                 <div class="feature-icon">🔑</div>
-                <div class="feature-text">Lockouts</div>
+                <div class="feature-text">Lockout</div>
             </div>
         </div>
         
-        <p style="margin-top: 4rem;">
-            <a href="/business" class="business-link">For tow operators & repair shops →</a>
+        <p class="business-link">
+            <a href="/business">For tow operators & repair shops →</a>
         </p>
     </div>
 </body>
