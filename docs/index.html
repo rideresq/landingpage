@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideResQ - Roadside Help, Instantly</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.25rem;
+            color: #a0a0a0;
+            margin-bottom: 3rem;
+        }
+        
+        .help-text {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+        
+        .cta-phone {
+            display: inline-block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(90deg, #f39c12, #e74c3c);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(243, 156, 18, 0.4);
+        }
+        
+        .cta-phone:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(243, 156, 18, 0.6);
+        }
+        
+        .cta-sub {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 4rem;
+        }
+        
+        .business-link {
+            color: #f39c12;
+            text-decoration: none;
+            font-size: 0.95rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        
+        .business-link:hover {
+            border-bottom-color: #f39c12;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-text {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">RideResQ</div>
+        <div class="tagline">Roadside help, instantly</div>
+        
+        <div class="help-text">
+            Stuck on the road?<br>
+            Text or call us now.
+        </div>
+        
+        <a href="tel:+17205551234" class="cta-phone">
+            (720) 555-1234
+        </a>
+        
+        <div class="cta-sub">
+            We'll connect you with help in minutes
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🚗</div>
+                <div class="feature-text">Towing</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔧</div>
+                <div class="feature-text">Repairs</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-text">Jump starts</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔑</div>
+                <div class="feature-text">Lockouts</div>
+            </div>
+        </div>
+        
+        <p style="margin-top: 4rem;">
+            <a href="/business" class="business-link">For tow operators & repair shops →</a>
+        </p>
+    </div>
+</body>
+</html>

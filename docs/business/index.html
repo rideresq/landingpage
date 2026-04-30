@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideResQ for Business - Never Miss a Call Again</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0f0f1a;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .highlight {
+            color: #f39c12;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(90deg, #f39c12, #e74c3c);
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(243, 156, 18, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(243, 156, 18, 0.6);
+        }
+        
+        .section {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .problem {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .problem-stat {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #e74c3c;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .pain-point {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .pain-point-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .pain-point h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pain-point p {
+            color: #888;
+            font-size: 0.95rem;
+        }
+        
+        .how-it-works {
+            background: #1a1a2e;
+        }
+        
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .step-number {
+            background: linear-gradient(90deg, #f39c12, #e74c3c);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .step-content p {
+            color: #888;
+        }
+        
+        .pricing {
+            text-align: center;
+        }
+        
+        .price-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #f39c12;
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 400;
+        }
+        
+        .price-features {
+            text-align: left;
+            margin: 2rem 0;
+        }
+        
+        .price-features li {
+            list-style: none;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #2a2a4a;
+        }
+        
+        .price-features li:before {
+            content: "✓ ";
+            color: #f39c12;
+        }
+        
+        .guarantee {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .final-cta {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .final-cta h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .final-cta p {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="logo">RideResQ</div>
+        <h1>Stop Losing Jobs to <span class="highlight">Missed Calls</span></h1>
+        <p class="subtitle">
+            When you're under a car or on a tow, calls go to voicemail. 
+            Customers call the next guy. You lose $500+ jobs without knowing it.
+        </p>
+        <a href="#contact" class="cta-button">Get Started →</a>
+    </div>
+    
+    <div class="section">
+        <div class="problem">
+            <div class="problem-stat">62%</div>
+            <p>of customers won't leave a voicemail — they just call your competitor</p>
+        </div>
+        
+        <div class="pain-points">
+            <div class="pain-point">
+                <div class="pain-point-icon">📞</div>
+                <h3>Can't answer while working</h3>
+                <p>Hands covered in grease, under a lift, hooking up a tow — calls go unanswered</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-icon">💸</div>
+                <h3>Every missed call = lost revenue</h3>
+                <p>Average repair ticket: $400-800. Average tow: $150-300. Adds up fast.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-icon">😤</div>
+                <h3>Customers are impatient</h3>
+                <p>Car trouble is stressful. They need help NOW, not a callback in 2 hours.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="how-it-works section">
+        <h2>How RideResQ Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Customer calls, you miss it</h3>
+                    <p>You're busy. It happens. But now they don't go to voicemail...</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>We text them instantly</h3>
+                    <p>"Hey! Sorry we missed you. What's going on with your car?" — sent within seconds.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>They reply, you stay in the loop</h3>
+                    <p>Conversation continues via text. You respond when you can. Customer stays engaged.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Job saved</h3>
+                    <p>Instead of calling your competitor, they're waiting for you. That's $500 you would've lost.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section pricing">
+        <h2>Simple Pricing</h2>
+        <div class="price-card">
+            <div class="price">$247<span>/month</span></div>
+            <ul class="price-features">
+                <li>Instant missed-call text-back</li>
+                <li>Two-way SMS conversations</li>
+                <li>Your business name & branding</li>
+                <li>Dashboard to see all leads</li>
+                <li>Works with your existing phone number</li>
+                <li>Setup in under 24 hours</li>
+            </ul>
+            <a href="#contact" class="cta-button">Start Free Trial</a>
+            <p class="guarantee">7-day free trial. Cancel anytime. No contracts.</p>
+        </div>
+    </div>
+    
+    <div class="final-cta" id="contact">
+        <h2>Ready to stop losing calls?</h2>
+        <p>Text us at the number below and we'll get you set up today.</p>
+        <a href="sms:+17205551234" class="cta-button">Text (720) 555-1234</a>
+    </div>
+    
+    <footer>
+        <a href="/">← Back to RideResQ.com</a>
+        <p style="margin-top: 1rem;">© 2026 RideResQ. Denver, CO.</p>
+    </footer>
+</body>
+</html>
