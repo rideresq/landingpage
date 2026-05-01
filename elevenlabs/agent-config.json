@@ -1,0 +1,871 @@
+{
+  "name": "RideResQ AI Dispatcher",
+  "conversation_config": {
+    "asr": {
+      "quality": "high",
+      "provider": "elevenlabs",
+      "user_input_audio_format": "pcm_16000",
+      "keywords": [
+        "RideResQ",
+        "tow",
+        "towing",
+        "flat tire",
+        "jump start",
+        "dead battery",
+        "lockout",
+        "breakdown",
+        "repair shop",
+        "mechanic",
+        "roadside"
+      ]
+    },
+    "turn": {
+      "turn_timeout": 7.0,
+      "initial_wait_time": null,
+      "silence_end_call_timeout": -1.0,
+      "soft_timeout_config": {
+        "timeout_seconds": -1.0,
+        "message": "One moment while I check on that...",
+        "use_llm_generated_message": false
+      },
+      "mode": "turn",
+      "turn_eagerness": "normal",
+      "spelling_patience": "auto",
+      "speculative_turn": false,
+      "retranscribe_on_turn_timeout": false,
+      "turn_model": "turn_v2",
+      "interruption_ignore_terms": []
+    },
+    "tts": {
+      "model_id": "eleven_flash_v2",
+      "voice_id": "cgSgspJ2msm6clMCkdW9",
+      "supported_voices": [
+        {
+          "label": "Spanish",
+          "voice_id": "spPXlKT5a4JMfbhPRAzA",
+          "description": "For Spanish-speaking callers",
+          "language": "es",
+          "model_family": null,
+          "optimize_streaming_latency": null,
+          "stability": null,
+          "speed": null,
+          "similarity_boost": null
+        }
+      ],
+      "expressive_mode": false,
+      "suggested_audio_tags": [],
+      "agent_output_audio_format": "pcm_16000",
+      "optimize_streaming_latency": 3,
+      "stability": 0.71,
+      "speed": 1.05,
+      "similarity_boost": 0.84,
+      "text_normalisation_type": "system_prompt",
+      "pronunciation_dictionary_locators": []
+    },
+    "conversation": {
+      "text_only": false,
+      "max_duration_seconds": 900,
+      "client_events": [
+        "audio",
+        "interruption",
+        "user_transcript",
+        "agent_response",
+        "agent_response_correction",
+        "agent_chat_response_part"
+      ],
+      "file_input": {
+        "enabled": false,
+        "max_files_per_conversation": 0
+      },
+      "monitoring_enabled": true,
+      "monitoring_events": [
+        "user_transcript",
+        "agent_response",
+        "agent_response_correction"
+      ],
+      "dtmf_input_settings": null,
+      "source_attribution": false
+    },
+    "language_presets": {
+      "es": {
+        "overrides": {
+          "turn": null,
+          "tts": null,
+          "conversation": null,
+          "agent": {
+            "first_message": "Hola, gracias por llamar a RideResQ. Soy Alex, tu asistente de asistencia en carretera. ¿Necesitas ayuda con tu vehículo o eres un proveedor de servicios?",
+            "language": "es",
+            "max_conversation_duration_message": null,
+            "prompt": null
+          }
+        },
+        "first_message_translation": {
+          "source_hash": "{\"firstMessage\":\"Hi, thanks for calling RideResQ. I'm Alex, your roadside assistance coordinator. Are you needing help with your vehicle, or are you a service provider?\",\"language\":\"en\"}",
+          "text": "Hola, gracias por llamar a RideResQ. Soy Alex, tu asistente de asistencia en carretera. ¿Necesitas ayuda con tu vehículo o eres un proveedor de servicios?"
+        },
+        "soft_timeout_translation": null
+      }
+    },
+    "vad": {
+      "background_voice_detection": false
+    },
+    "agent": {
+      "first_message": "Hi, thanks for calling RideResQ! I'm Alex, your AI roadside coordinator. Are you needing help with your vehicle, or are you a tow or repair shop looking to partner with us?",
+      "language": "en",
+      "hinglish_mode": false,
+      "dynamic_variables": {
+        "dynamic_variable_placeholders": {
+          "caller_phone": "",
+          "caller_name": "there",
+          "caller_type": "unknown",
+          "vehicle_info": "",
+          "issue_type": "",
+          "location": "",
+          "provider_name": "",
+          "provider_type": "",
+          "job_id": "",
+          "eta_minutes": "",
+          "service_fee": "",
+          "callback_number": "(720) 650-0250"
+        }
+      },
+      "disable_first_message_interruptions": false,
+      "max_conversation_duration_message": "I apologize, but we've been on for a while. Let me make sure we have all your info and get you connected with help right away.",
+      "prompt": {
+        "prompt": "# IDENTITY\n\nYou are Alex, the AI dispatcher for RideResQ — an AI-powered roadside assistance service in the Denver metro area. You are friendly, efficient, and calm under pressure. People calling you are often stressed (stranded on the road) or busy (shop owners), so be warm but get to the point.\n\n# CALLER ROUTING\n\nYour FIRST job is to determine if the caller is:\n\n1. **CONSUMER** — Someone who needs roadside help (tow, jump start, flat tire, lockout, breakdown)\n2. **PROVIDER** — A tow truck operator, auto repair shop, or tire shop wanting to partner with RideResQ\n\nAsk upfront: \"Are you needing help with your vehicle, or are you a tow or repair shop looking to partner with us?\"\n\nRoute accordingly.\n\n# CONSUMER FLOW\n\nIf caller needs roadside help:\n\n## Step 1: Identify the Problem\nAsk: \"What's going on with your vehicle?\"\n\nCommon issues:\n- Dead battery / won't start → Jump start\n- Flat tire → Tire change or tow\n- Locked out → Lockout service\n- Accident / won't drive → Tow\n- Overheating / smoke → Tow\n- Out of gas → Fuel delivery\n- Other mechanical issue → Tow to shop\n\n## Step 2: Get Location\nAsk: \"Where are you right now? I need a street address or cross streets.\"\n\nIf they're unsure: \"Can you see any nearby businesses or street signs?\"\n\nConfirm: \"So you're at [location], is that right?\"\n\n## Step 3: Get Vehicle Info\nAsk: \"What kind of vehicle is it? Year, make, and model?\"\n\nExample: \"2019 Honda Accord, got it.\"\n\n## Step 4: Get Contact Info\nAsk: \"And what's the best number to reach you at?\"\n\nIf calling from their phone: \"Is this the best number to reach you?\"\n\n## Step 5: Dispatch\nSay: \"Perfect. I'm connecting you with a [tow truck / service provider] now. They should be there in about [ETA] minutes. You'll get a text with their info and tracking.\"\n\nUse the dispatch_job tool to create the job and notify providers.\n\n## Step 6: Confirm\nSay: \"You're all set. [Provider name] is on the way. They'll call you when they're close. Is there anything else I can help with?\"\n\nIf no: \"Stay safe, and help is on the way!\"\n\n# PROVIDER FLOW\n\nIf caller is a tow truck company, repair shop, or tire shop:\n\n## Step 1: Welcome\nSay: \"Awesome! We're always looking for great partners in the Denver area. Let me get some info about your business.\"\n\n## Step 2: Business Info\nAsk:\n- \"What's the name of your business?\"\n- \"Are you a tow truck operator, auto repair shop, or something else?\"\n- \"What areas do you typically service?\"\n\n## Step 3: Explain the Model\nSay: \"Here's how RideResQ works: We send you jobs when customers in your area need help. You only pay us when you complete a job — there's no monthly fee, no setup fee. We take a small cut per completed job. Zero risk on your end.\"\n\n## Step 4: Interest Check\nAsk: \"Does that sound like something you'd be interested in?\"\n\nIf yes: \"Great! I'll send you a text with a link to sign up and get started. You can be receiving jobs as soon as today.\"\n\nUse twilio_send_message to send signup link.\n\nIf they have questions: Answer them (see FAQ below).\n\nIf not interested: \"No problem at all. If anything changes, you can always reach us at (720) 650-0250. Have a great day!\"\n\n# PROVIDER FAQ\n\n**How much is the fee?**\n\"We take a small percentage of each completed job. The exact rate depends on the service type, but it's typically between 10-15%. You set your own prices — we just take a cut when you get paid.\"\n\n**What if the customer cancels?**\n\"If the customer cancels or no-shows, you don't pay us anything. You only pay when the job is completed.\"\n\n**How do I get paid?**\n\"You collect payment directly from the customer as usual. Our fee is billed separately at the end of each week.\"\n\n**What kind of jobs will I get?**\n\"It depends on your services. If you're a tow company, you'll get tow requests. If you're a repair shop, you'll get repair leads. You can set your service area and availability in the app.\"\n\n**Is there an app?**\n\"Yes! Once you sign up, you'll download our provider app. You'll see incoming jobs, accept or decline, and track everything there.\"\n\n# VOICEMAIL DETECTION\n\nIf you detect voicemail (phrases like \"leave a message\", \"at the tone\", \"not available\"):\n\nLeave this message:\n\"Hi, this is Alex from RideResQ calling about roadside assistance services in the Denver area. If you need help or want to learn more about partnering with us, call us back at (720) 650-0250. Thanks!\"\n\nThen end the call.\n\n# TONE GUIDELINES\n\n- Be warm and human, not robotic\n- For consumers: Be calm and reassuring — they're stressed\n- For providers: Be professional and efficient — they're busy\n- Keep responses short (1-2 sentences when possible)\n- Don't over-explain unless asked\n- If you don't know something, say so honestly\n\n# CALLBACK NUMBER\n\nIf anyone asks how to reach us: \"You can always call or text us at (720) 650-0250.\"\n\n# DYNAMIC VARIABLES\n\n- {{caller_phone}} — The caller's phone number\n- {{caller_name}} — The caller's name if provided\n- {{caller_type}} — \"consumer\" or \"provider\"\n- {{vehicle_info}} — Year, make, model\n- {{issue_type}} — Type of problem\n- {{location}} — Where they are\n- {{provider_name}} — Name of provider being dispatched\n- {{eta_minutes}} — Estimated arrival time\n- {{callback_number}} — (720) 650-0250",
+        "llm": "gpt-4o",
+        "reasoning_effort": null,
+        "thinking_budget": null,
+        "temperature": 0.4,
+        "max_tokens": -1,
+        "tool_ids": [],
+        "built_in_tools": {
+          "end_call": {
+            "type": "system",
+            "name": "end_call",
+            "description": "End the call when conversation is complete",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound": null,
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "end_call"
+            }
+          },
+          "language_detection": {
+            "type": "system",
+            "name": "language_detection",
+            "description": "Detect caller language and switch if needed",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound": null,
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "language_detection"
+            }
+          },
+          "voicemail_detection": {
+            "type": "system",
+            "name": "voicemail_detection",
+            "description": "Detects voicemail and leaves a message",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound": null,
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "voicemail_detection",
+              "voicemail_message": "Hi, this is Alex from RideResQ calling about roadside assistance services in the Denver area. If you need help or want to learn more about partnering with us, call us back at (720) 650-0250. Thanks!"
+            }
+          }
+        },
+        "enable_parallel_tool_calls": false,
+        "mcp_server_ids": [],
+        "native_mcp_server_ids": [],
+        "knowledge_base": [],
+        "custom_llm": null,
+        "ignore_default_personality": false,
+        "rag": {
+          "enabled": false,
+          "embedding_model": "e5_mistral_7b_instruct",
+          "max_vector_distance": 0.6,
+          "max_documents_length": 50000,
+          "max_retrieved_rag_chunks_count": 20,
+          "num_candidates": null,
+          "query_rewrite_prompt_override": null
+        },
+        "timezone": "America/Denver",
+        "backup_llm_config": {
+          "preference": "default"
+        },
+        "cascade_timeout_seconds": 8.0,
+        "tools": [
+          {
+            "type": "webhook",
+            "name": "dispatch_job",
+            "description": "Create a new roadside assistance job and dispatch to available providers",
+            "response_timeout_secs": 30,
+            "disable_interruptions": false,
+            "force_pre_tool_speech": true,
+            "pre_tool_speech": "Let me connect you with a provider now...",
+            "assignments": [],
+            "tool_call_sound": null,
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "dynamic_variables": {
+              "dynamic_variable_placeholders": {}
+            },
+            "execution_mode": "immediate",
+            "webhook_url": "{{RIDERESQ_API_URL}}/api/jobs/dispatch",
+            "request_method": "POST",
+            "request_headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer {{RIDERESQ_API_KEY}}"
+            },
+            "request_body_schema": {
+              "type": "object",
+              "properties": {
+                "caller_phone": {
+                  "type": "string",
+                  "description": "Customer's phone number"
+                },
+                "caller_name": {
+                  "type": "string",
+                  "description": "Customer's name"
+                },
+                "issue_type": {
+                  "type": "string",
+                  "enum": ["tow", "jump_start", "flat_tire", "lockout", "fuel_delivery", "other"],
+                  "description": "Type of roadside service needed"
+                },
+                "vehicle_year": {
+                  "type": "string",
+                  "description": "Vehicle year"
+                },
+                "vehicle_make": {
+                  "type": "string",
+                  "description": "Vehicle make"
+                },
+                "vehicle_model": {
+                  "type": "string",
+                  "description": "Vehicle model"
+                },
+                "location": {
+                  "type": "string",
+                  "description": "Customer's current location"
+                },
+                "notes": {
+                  "type": "string",
+                  "description": "Additional notes about the situation"
+                }
+              },
+              "required": ["caller_phone", "issue_type", "location"]
+            }
+          },
+          {
+            "type": "webhook",
+            "name": "register_provider_interest",
+            "description": "Register a provider's interest in partnering with RideResQ",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "force_pre_tool_speech": true,
+            "pre_tool_speech": "Let me get that set up for you...",
+            "assignments": [],
+            "tool_call_sound": null,
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "dynamic_variables": {
+              "dynamic_variable_placeholders": {}
+            },
+            "execution_mode": "immediate",
+            "webhook_url": "{{RIDERESQ_API_URL}}/api/providers/register-interest",
+            "request_method": "POST",
+            "request_headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer {{RIDERESQ_API_KEY}}"
+            },
+            "request_body_schema": {
+              "type": "object",
+              "properties": {
+                "business_name": {
+                  "type": "string",
+                  "description": "Name of the business"
+                },
+                "business_type": {
+                  "type": "string",
+                  "enum": ["tow", "repair", "tire", "other"],
+                  "description": "Type of business"
+                },
+                "phone": {
+                  "type": "string",
+                  "description": "Business phone number"
+                },
+                "service_areas": {
+                  "type": "string",
+                  "description": "Areas they service"
+                },
+                "contact_name": {
+                  "type": "string",
+                  "description": "Contact person's name"
+                }
+              },
+              "required": ["business_name", "business_type", "phone"]
+            }
+          },
+          {
+            "type": "api_integration_webhook",
+            "name": "twilio_send_message",
+            "description": "Send an SMS to the caller with job details or signup link",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound": null,
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "dynamic_variables": {
+              "dynamic_variable_placeholders": {}
+            },
+            "execution_mode": "immediate",
+            "tool_version": "1.0.0",
+            "api_integration_id": "twilio",
+            "api_integration_connection_id": "{{TWILIO_CONNECTION_ID}}",
+            "api_schema_overrides": {
+              "schema_overrides": {
+                "request_body.From": {
+                  "source": "constant",
+                  "constant_value": "+17206500250"
+                }
+              },
+              "request_headers": null,
+              "response_filter_mode": null,
+              "response_filters": null
+            }
+          },
+          {
+            "type": "system",
+            "name": "end_call",
+            "description": "End the call",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound": null,
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "end_call"
+            }
+          },
+          {
+            "type": "system",
+            "name": "language_detection",
+            "description": "Detect and switch language",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound": null,
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "language_detection"
+            }
+          },
+          {
+            "type": "system",
+            "name": "voicemail_detection",
+            "description": "Detect voicemail and leave message",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound": null,
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "voicemail_detection",
+              "voicemail_message": "Hi, this is Alex from RideResQ calling about roadside assistance services in the Denver area. If you need help or want to learn more about partnering with us, call us back at (720) 650-0250. Thanks!"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "platform_settings": {
+    "evaluation": {
+      "criteria": []
+    },
+    "widget": {
+      "variant": "full",
+      "placement": "bottom-right",
+      "expandable": "never",
+      "avatar": {
+        "type": "orb",
+        "color_1": "#FFB800",
+        "color_2": "#0D0D0F"
+      },
+      "feedback_mode": "none",
+      "bg_color": "#0D0D0F",
+      "text_color": "#F0F0F0",
+      "btn_color": "#FFB800",
+      "btn_text_color": "#0D0D0F",
+      "border_color": "#2A2A32",
+      "focus_color": "#FFB800",
+      "border_radius": null,
+      "btn_radius": null,
+      "action_text": "Need roadside help?",
+      "start_call_text": "Call RideResQ",
+      "end_call_text": "End Call",
+      "listening_text": "Listening...",
+      "speaking_text": "Alex is speaking...",
+      "terms_text": "By continuing, you agree to RideResQ's terms of service and privacy policy at rideresq.com/terms",
+      "show_avatar_when_collapsed": true,
+      "disable_banner": false,
+      "mic_muting_enabled": true,
+      "transcript_enabled": true,
+      "text_input_enabled": true,
+      "default_expanded": false,
+      "always_expanded": false,
+      "dismissible": true,
+      "show_agent_status": true,
+      "show_conversation_id": false
+    },
+    "data_collection": {},
+    "overrides": {
+      "conversation_config_override": {
+        "turn": {
+          "soft_timeout_config": {
+            "message": false
+          }
+        },
+        "tts": {
+          "voice_id": false,
+          "stability": false,
+          "speed": false,
+          "similarity_boost": false
+        },
+        "conversation": {
+          "text_only": true
+        },
+        "agent": {
+          "first_message": false,
+          "language": true,
+          "prompt": {
+            "prompt": false,
+            "llm": false
+          }
+        }
+      }
+    },
+    "workspace_overrides": {
+      "webhooks": {
+        "post_call_webhook_id": "{{POST_CALL_WEBHOOK_ID}}",
+        "events": ["transcript", "summary"],
+        "transcript_format": "json",
+        "send_audio": false
+      }
+    },
+    "archived": false,
+    "guardrails": {
+      "version": "1",
+      "focus": {
+        "is_enabled": true
+      },
+      "prompt_injection": {
+        "is_enabled": true
+      },
+      "content": {
+        "execution_mode": "streaming",
+        "config": {
+          "profanity": {
+            "is_enabled": true,
+            "threshold": "high"
+          }
+        },
+        "trigger_action": {
+          "type": "respond",
+          "message": "I'm here to help with roadside assistance. How can I help you today?"
+        }
+      }
+    },
+    "privacy": {
+      "record_voice": true,
+      "retention_days": 90,
+      "delete_transcript_and_pii": false,
+      "delete_audio": false,
+      "zero_retention_mode": false
+    },
+    "call_limits": {
+      "agent_concurrency_limit": 10,
+      "daily_limit": 1000,
+      "bursting_enabled": true
+    }
+  },
+  "workflow": {
+    "edges": {
+      "edge_start_to_router": {
+        "source": "start_node",
+        "target": "node_caller_router",
+        "forward_condition": {
+          "label": null,
+          "type": "unconditional"
+        },
+        "backward_condition": null
+      },
+      "edge_router_to_consumer": {
+        "source": "node_caller_router",
+        "target": "node_consumer_intake",
+        "forward_condition": {
+          "label": "Consumer Needs Help",
+          "type": "llm",
+          "condition": "Caller indicates they need roadside help, their car broke down, they're stranded, need a tow, have a flat tire, dead battery, locked out, or any vehicle emergency."
+        },
+        "backward_condition": null
+      },
+      "edge_router_to_provider": {
+        "source": "node_caller_router",
+        "target": "node_provider_onboard",
+        "forward_condition": {
+          "label": "Provider Inquiry",
+          "type": "llm",
+          "condition": "Caller indicates they are a tow truck company, auto repair shop, tire shop, or service provider interested in partnering, joining, or working with RideResQ."
+        },
+        "backward_condition": null
+      },
+      "edge_router_to_voicemail": {
+        "source": "node_caller_router",
+        "target": "node_voicemail",
+        "forward_condition": {
+          "label": "Voicemail Detected",
+          "type": "llm",
+          "condition": "Voicemail greeting detected: 'leave a message', 'at the tone', 'not available', automated voice reading phone number, beep followed by silence."
+        },
+        "backward_condition": null
+      },
+      "edge_consumer_to_location": {
+        "source": "node_consumer_intake",
+        "target": "node_get_location",
+        "forward_condition": {
+          "label": "Issue Identified",
+          "type": "llm",
+          "condition": "Customer has described their vehicle issue (tow, flat tire, dead battery, lockout, etc.)"
+        },
+        "backward_condition": null
+      },
+      "edge_location_to_vehicle": {
+        "source": "node_get_location",
+        "target": "node_get_vehicle",
+        "forward_condition": {
+          "label": "Location Confirmed",
+          "type": "llm",
+          "condition": "Customer has provided and confirmed their location"
+        },
+        "backward_condition": null
+      },
+      "edge_vehicle_to_dispatch": {
+        "source": "node_get_vehicle",
+        "target": "node_dispatch",
+        "forward_condition": {
+          "label": "Vehicle Info Collected",
+          "type": "llm",
+          "condition": "Customer has provided vehicle information (year, make, model)"
+        },
+        "backward_condition": null
+      },
+      "edge_dispatch_to_confirm": {
+        "source": "node_dispatch",
+        "target": "node_consumer_confirm",
+        "forward_condition": {
+          "label": "Job Dispatched",
+          "type": "llm",
+          "condition": "Job has been created and provider is being dispatched"
+        },
+        "backward_condition": null
+      },
+      "edge_confirm_to_end": {
+        "source": "node_consumer_confirm",
+        "target": "node_end_consumer",
+        "forward_condition": {
+          "label": "Confirmed",
+          "type": "llm",
+          "condition": "Customer confirms they're all set or has no more questions"
+        },
+        "backward_condition": null
+      },
+      "edge_provider_to_explain": {
+        "source": "node_provider_onboard",
+        "target": "node_provider_explain",
+        "forward_condition": {
+          "label": "Business Info Collected",
+          "type": "llm",
+          "condition": "Provider has given business name and type"
+        },
+        "backward_condition": null
+      },
+      "edge_explain_to_interested": {
+        "source": "node_provider_explain",
+        "target": "node_provider_interested",
+        "forward_condition": {
+          "label": "Interest Confirmed",
+          "type": "llm",
+          "condition": "Provider expresses interest in partnering"
+        },
+        "backward_condition": null
+      },
+      "edge_explain_to_notinterested": {
+        "source": "node_provider_explain",
+        "target": "node_provider_notinterested",
+        "forward_condition": {
+          "label": "Not Interested",
+          "type": "llm",
+          "condition": "Provider says they're not interested or declines"
+        },
+        "backward_condition": null
+      },
+      "edge_explain_to_questions": {
+        "source": "node_provider_explain",
+        "target": "node_provider_questions",
+        "forward_condition": {
+          "label": "Has Questions",
+          "type": "llm",
+          "condition": "Provider asks questions about pricing, how it works, fees, payment, etc."
+        },
+        "backward_condition": null
+      },
+      "edge_questions_to_explain": {
+        "source": "node_provider_questions",
+        "target": "node_provider_explain",
+        "forward_condition": {
+          "label": "Return to Pitch",
+          "type": "llm",
+          "condition": "Questions answered, return to interest check"
+        },
+        "backward_condition": null
+      },
+      "edge_interested_to_end": {
+        "source": "node_provider_interested",
+        "target": "node_end_provider",
+        "forward_condition": {
+          "label": "Signup Link Sent",
+          "type": "llm",
+          "condition": "Provider signup link has been sent"
+        },
+        "backward_condition": null
+      },
+      "edge_notinterested_to_end": {
+        "source": "node_provider_notinterested",
+        "target": "node_end_provider",
+        "forward_condition": {
+          "label": null,
+          "type": "unconditional"
+        },
+        "backward_condition": null
+      }
+    },
+    "nodes": {
+      "start_node": {
+        "type": "start",
+        "position": {"x": 0, "y": 0},
+        "edge_order": ["edge_start_to_router"]
+      },
+      "node_caller_router": {
+        "type": "override_agent",
+        "position": {"x": 200, "y": 0},
+        "edge_order": ["edge_router_to_consumer", "edge_router_to_provider", "edge_router_to_voicemail"],
+        "label": "Caller Router",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nYou are routing the caller to the appropriate flow.\n\n# Instructions\n- Greet the caller warmly\n- Ask if they need roadside help or are a service provider\n- Listen for their response and route accordingly\n\n# What to Say\nSay: \"Hi, thanks for calling RideResQ! I'm Alex, your AI roadside coordinator. Are you needing help with your vehicle, or are you a tow or repair shop looking to partner with us?\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_consumer_intake": {
+        "type": "override_agent",
+        "position": {"x": 400, "y": -200},
+        "edge_order": ["edge_consumer_to_location"],
+        "label": "Consumer: Identify Problem",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nYou're helping a stranded driver. They need roadside assistance.\n\n# Instructions\n- Be calm and reassuring\n- Find out what's wrong with their vehicle\n- Keep it simple and quick\n\n# What to Say\nSay: \"I'm sorry to hear you're having trouble. What's going on with your vehicle?\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_get_location": {
+        "type": "override_agent",
+        "position": {"x": 600, "y": -200},
+        "edge_order": ["edge_location_to_vehicle"],
+        "label": "Consumer: Get Location",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nCollect the customer's location.\n\n# Instructions\n- Ask for their current location (address or cross streets)\n- If they're unsure, ask about nearby businesses or street signs\n- Confirm the location back to them\n\n# What to Say\nSay: \"Got it. Where are you right now? I need a street address or cross streets so I can send help.\"\n\nIf unclear: \"Can you see any nearby businesses or street signs?\"\n\nConfirm: \"So you're at [location], is that right?\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_get_vehicle": {
+        "type": "override_agent",
+        "position": {"x": 800, "y": -200},
+        "edge_order": ["edge_vehicle_to_dispatch"],
+        "label": "Consumer: Get Vehicle Info",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nCollect vehicle information.\n\n# Instructions\n- Ask for year, make, and model\n- Confirm their contact number\n\n# What to Say\nSay: \"What kind of vehicle is it? Year, make, and model?\"\n\nThen: \"And is this the best number to reach you at?\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_dispatch": {
+        "type": "override_agent",
+        "position": {"x": 1000, "y": -200},
+        "edge_order": ["edge_dispatch_to_confirm"],
+        "label": "Consumer: Dispatch",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nDispatch help and confirm with the customer.\n\n# Instructions\n- Use dispatch_job tool to create the job\n- Tell customer help is on the way\n- Give estimated arrival time\n- Tell them they'll get a text with provider info\n\n# What to Say\nSay: \"Perfect. I'm connecting you with a provider now. They should be there in about 20-30 minutes. You'll get a text with their info and tracking.\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_consumer_confirm": {
+        "type": "override_agent",
+        "position": {"x": 1200, "y": -200},
+        "edge_order": ["edge_confirm_to_end"],
+        "label": "Consumer: Confirm",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nConfirm everything is set and offer final help.\n\n# Instructions\n- Confirm help is on the way\n- Ask if there's anything else\n- End warmly\n\n# What to Say\nSay: \"You're all set. Help is on the way and you'll get a text shortly. Is there anything else I can help with?\"\n\nIf no: \"Stay safe, and help is on the way! Bye!\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_end_consumer": {
+        "type": "end",
+        "position": {"x": 1400, "y": -200},
+        "edge_order": []
+      },
+      "node_provider_onboard": {
+        "type": "override_agent",
+        "position": {"x": 400, "y": 200},
+        "edge_order": ["edge_provider_to_explain"],
+        "label": "Provider: Collect Info",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nYou're onboarding a potential service provider partner.\n\n# Instructions\n- Welcome them warmly\n- Collect basic business info\n- Be professional but friendly\n\n# What to Say\nSay: \"Awesome! We're always looking for great partners in the Denver area. What's the name of your business, and are you a tow truck operator, auto repair shop, or something else?\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_provider_explain": {
+        "type": "override_agent",
+        "position": {"x": 600, "y": 200},
+        "edge_order": ["edge_explain_to_interested", "edge_explain_to_notinterested", "edge_explain_to_questions"],
+        "label": "Provider: Explain Model",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nExplain the RideResQ business model to the provider.\n\n# Instructions\n- Explain outcome-based pricing (pay only when you complete a job)\n- Emphasize zero risk, no monthly fees\n- Check if they're interested\n\n# What to Say\nSay: \"Here's how RideResQ works: We send you jobs when customers in your area need help. You only pay us when you complete a job — there's no monthly fee, no setup fee. We take a small cut per completed job. Zero risk on your end.\"\n\nThen ask: \"Does that sound like something you'd be interested in?\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_provider_questions": {
+        "type": "override_agent",
+        "position": {"x": 800, "y": 300},
+        "edge_order": ["edge_questions_to_explain"],
+        "label": "Provider: Answer Questions",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nAnswer provider questions about RideResQ partnership.\n\n# Common Questions\n\n**How much is the fee?**\n\"We take a small percentage, typically 10-15% depending on service type. You set your own prices.\"\n\n**What if customer cancels?**\n\"If they cancel or no-show, you pay nothing. You only pay when the job is done.\"\n\n**How do I get paid?**\n\"You collect payment directly from the customer. Our fee is billed weekly.\"\n\n**What jobs will I get?**\n\"Depends on your services and service area. You control what jobs you want in the app.\"\n\n**Is there an app?**\n\"Yes! Once you sign up, you'll download our provider app to see and manage incoming jobs.\"\n\nAfter answering: \"Does that answer your question? Anything else you'd like to know?\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_provider_interested": {
+        "type": "override_agent",
+        "position": {"x": 800, "y": 100},
+        "edge_order": ["edge_interested_to_end"],
+        "label": "Provider: Send Signup",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nSend the provider a signup link.\n\n# Instructions\n- Use register_provider_interest tool to log their info\n- Use twilio_send_message to send signup link\n- Confirm it was sent\n\n# What to Say\nSay: \"Great! I'll send you a text right now with a link to sign up. You can be receiving jobs as soon as today.\"\n\n[Send SMS with: \"Welcome to RideResQ! Sign up here to start receiving jobs: https://rideresq.com/provider-signup\"]\n\nThen: \"I just sent that over. Check your texts. Any questions before I let you go?\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_provider_notinterested": {
+        "type": "override_agent",
+        "position": {"x": 800, "y": 200},
+        "edge_order": ["edge_notinterested_to_end"],
+        "label": "Provider: Not Interested",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nHandle gracefully when provider isn't interested.\n\n# What to Say\nSay: \"No problem at all! If anything changes, you can always reach us at (720) 650-0250. Have a great day!\"",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      },
+      "node_end_provider": {
+        "type": "end",
+        "position": {"x": 1000, "y": 200},
+        "edge_order": []
+      },
+      "node_voicemail": {
+        "type": "override_agent",
+        "position": {"x": 400, "y": 400},
+        "edge_order": [],
+        "label": "Voicemail Handler",
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "prompt": "# Role\nLeave a voicemail message.\n\n# What to Say\nSay: \"Hi, this is Alex from RideResQ calling about roadside assistance services in the Denver area. If you need help or want to learn more about partnering with us, call us back at (720) 650-0250. Thanks!\"\n\nThen end the call.",
+              "llm": "gpt-4o"
+            }
+          }
+        }
+      }
+    },
+    "prevent_subagent_loops": true
+  },
+  "procedures": {},
+  "procedures_enabled": false,
+  "trust_context": "trusted"
+}
