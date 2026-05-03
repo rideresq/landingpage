@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RideResQ - Roadside Help, Instantly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="theme-color" content="#0d0d0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>RideResQ - Car Trouble? Get Help Fast.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,12 +20,18 @@
             --headlight: #f0f0f0;
             --fog: #888894;
             --danger: #ff3b30;
+            --success: #34c759;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body {
+            height: 100%;
         }
         
         body {
@@ -39,7 +48,6 @@
             overflow-x: hidden;
         }
         
-        /* Road texture overlay */
         body::before {
             content: '';
             position: fixed;
@@ -49,18 +57,11 @@
             bottom: 0;
             background-image: 
                 radial-gradient(ellipse at 50% 0%, var(--amber-glow) 0%, transparent 50%),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(255,255,255,0.01) 2px,
-                    rgba(255,255,255,0.01) 4px
-                );
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
             pointer-events: none;
             z-index: 0;
         }
         
-        /* Animated road lines */
         .road-lines {
             position: fixed;
             bottom: 0;
@@ -68,13 +69,7 @@
             transform: translateX(-50%);
             width: 4px;
             height: 100vh;
-            background: repeating-linear-gradient(
-                to top,
-                var(--amber) 0px,
-                var(--amber) 40px,
-                transparent 40px,
-                transparent 80px
-            );
+            background: repeating-linear-gradient(to top, var(--amber) 0px, var(--amber) 40px, transparent 40px, transparent 80px);
             opacity: 0.3;
             animation: roadMove 2s linear infinite;
         }
@@ -86,44 +81,37 @@
         
         .container {
             text-align: center;
-            max-width: 600px;
+            max-width: 500px;
+            width: 100%;
             position: relative;
             z-index: 1;
-            animation: fadeUp 0.8s ease-out;
-        }
-        
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         .logo {
             font-family: 'Archivo Black', sans-serif;
-            font-size: 4rem;
+            font-size: 2.5rem;
             letter-spacing: -2px;
             margin-bottom: 0.25rem;
             color: var(--headlight);
             text-shadow: 0 0 60px var(--amber-glow);
-            animation: fadeUp 0.8s ease-out 0.1s both;
         }
         
-        .logo span {
-            color: var(--amber);
-        }
+        .logo span { color: var(--amber); }
         
         .tagline {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--fog);
-            margin-bottom: 4rem;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: fadeUp 0.8s ease-out 0.2s both;
+            letter-spacing: 2px;
+        }
+        
+        .state { display: none; animation: fadeIn 0.3s ease; }
+        .state.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .status {
@@ -136,14 +124,13 @@
             border-radius: 100px;
             font-size: 0.75rem;
             color: var(--fog);
-            margin-bottom: 2rem;
-            animation: fadeUp 0.8s ease-out 0.3s both;
+            margin-bottom: 1.5rem;
         }
         
         .status-dot {
             width: 8px;
             height: 8px;
-            background: #34c759;
+            background: var(--success);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
         }
@@ -153,101 +140,264 @@
             50% { opacity: 0.5; }
         }
         
-        .help-text {
+        h1 {
             font-family: 'Archivo Black', sans-serif;
             font-size: 1.75rem;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-            animation: fadeUp 0.8s ease-out 0.4s both;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
         }
         
-        .help-sub {
+        .hero-sub {
             color: var(--fog);
-            font-size: 0.9rem;
-            margin-bottom: 2.5rem;
-            animation: fadeUp 0.8s ease-out 0.5s both;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            font-size: 1rem;
         }
         
-        .cta-phone {
+        .hero-sub strong {
+            color: var(--headlight);
+        }
+        
+        p {
+            color: var(--fog);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        /* Trust badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--success);
+        }
+        
+        .trust-badge::before {
+            content: '✓';
+            font-weight: bold;
+        }
+        
+        /* Buttons */
+        .btn {
             display: inline-block;
             font-family: 'Archivo Black', sans-serif;
-            font-size: 2rem;
-            color: var(--asphalt);
-            background: var(--amber);
-            padding: 1.25rem 3rem;
-            text-decoration: none;
-            position: relative;
+            font-size: 1rem;
+            padding: 1rem 2rem;
+            border: none;
+            cursor: pointer;
             transition: all 0.2s ease;
-            animation: fadeUp 0.8s ease-out 0.6s both;
-            clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+            width: 100%;
+            max-width: 320px;
+            text-decoration: none;
         }
         
-        .cta-phone:hover {
+        .btn-primary {
+            background: var(--amber);
+            color: var(--asphalt);
+            clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+        }
+        
+        .btn-primary:hover {
             background: var(--headlight);
             transform: scale(1.02);
-            box-shadow: 0 0 40px var(--amber-glow);
         }
         
-        .cta-phone::before {
-            content: '📞';
-            margin-right: 12px;
-        }
-        
-        .cta-sub {
-            font-size: 0.8rem;
+        .btn-primary:disabled {
+            background: var(--steel);
             color: var(--fog);
-            margin-top: 1.5rem;
-            margin-bottom: 4rem;
-            animation: fadeUp 0.8s ease-out 0.7s both;
+            cursor: not-allowed;
+            transform: none;
         }
         
+        .btn-secondary {
+            background: var(--concrete);
+            color: var(--headlight);
+            border: 1px solid var(--steel);
+            margin-top: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--amber);
+            color: var(--amber);
+        }
+        
+        .btn-call {
+            font-size: 1.4rem;
+            padding: 1.25rem 2rem;
+        }
+        
+        .btn-call::before {
+            content: '📞 ';
+        }
+        
+        .btn-text::before {
+            content: '💬 ';
+        }
+        
+        /* Live estimate card */
+        .estimate-card {
+            background: var(--concrete);
+            border: 1px solid var(--steel);
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .estimate-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .estimate-label {
+            font-size: 0.65rem;
+            color: var(--fog);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .estimate-service {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.95rem;
+        }
+        
+        .estimate-right {
+            text-align: right;
+        }
+        
+        .estimate-price {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem;
+            color: var(--amber);
+        }
+        
+        .estimate-eta {
+            font-size: 0.75rem;
+            color: var(--success);
+        }
+        
+        /* Spinner */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--steel);
+            border-top-color: var(--amber);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* Location card */
+        .location-card {
+            background: var(--concrete);
+            border: 2px solid var(--amber);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .location-card.confirmed { border-color: var(--success); }
+        
+        .location-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--amber);
+            margin-bottom: 0.5rem;
+        }
+        
+        .location-card.confirmed .location-label { color: var(--success); }
+        
+        .location-address {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+        
+        .location-coords {
+            font-size: 0.7rem;
+            color: var(--fog);
+            margin-top: 0.5rem;
+        }
+        
+        /* Button group */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-group .btn {
+            flex: 1;
+            padding: 0.875rem 1rem;
+        }
+        
+        .btn-confirm { background: var(--success); color: var(--asphalt); }
+        .btn-wrong { background: var(--steel); color: var(--headlight); }
+        .btn-wrong:hover { background: var(--danger); }
+        
+        /* Features row */
         .features {
             display: flex;
             justify-content: center;
             gap: 1px;
             background: var(--steel);
             border: 1px solid var(--steel);
-            animation: fadeUp 0.8s ease-out 0.8s both;
+            margin-top: 2rem;
         }
         
         .feature {
             background: var(--concrete);
-            padding: 1.5rem 2rem;
+            padding: 1rem 1.25rem;
             text-align: center;
-            transition: background 0.2s ease;
+            flex: 1;
         }
         
-        .feature:hover {
-            background: var(--steel);
-        }
-        
-        .feature-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            filter: grayscale(1);
-            transition: filter 0.2s ease;
-        }
-        
-        .feature:hover .feature-icon {
-            filter: grayscale(0);
-        }
+        .feature-icon { font-size: 1.25rem; margin-bottom: 0.25rem; }
         
         .feature-text {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             color: var(--fog);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
-        .business-link {
-            margin-top: 4rem;
-            animation: fadeUp 0.8s ease-out 0.9s both;
+        /* Manual input */
+        .manual-input {
+            width: 100%;
+            padding: 1rem;
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--concrete);
+            border: 1px solid var(--steel);
+            color: var(--headlight);
+            margin-bottom: 1rem;
         }
+        
+        .manual-input:focus { outline: none; border-color: var(--amber); }
+        .manual-input::placeholder { color: var(--fog); }
+        
+        /* Business link */
+        .business-link { margin-top: 2.5rem; }
         
         .business-link a {
             color: var(--fog);
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             padding-bottom: 4px;
@@ -255,32 +405,41 @@
             transition: all 0.2s ease;
         }
         
-        .business-link a:hover {
-            color: var(--amber);
-            border-color: var(--amber);
+        .business-link a:hover { color: var(--amber); border-color: var(--amber); }
+        
+        .icon { font-size: 3rem; margin-bottom: 1rem; }
+        
+        .privacy-note {
+            font-size: 0.7rem;
+            color: var(--fog);
+            margin-top: 1.5rem;
         }
         
-        @media (max-width: 600px) {
-            .logo {
-                font-size: 2.5rem;
-            }
-            
-            .help-text {
-                font-size: 1.25rem;
-            }
-            
-            .cta-phone {
-                font-size: 1.5rem;
-                padding: 1rem 2rem;
-            }
-            
-            .features {
-                flex-wrap: wrap;
-            }
-            
-            .feature {
-                flex: 1 1 50%;
-            }
+        /* Emergency mode banner */
+        .emergency-banner {
+            background: var(--danger);
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: emergencyPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes emergencyPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        @media (max-width: 500px) {
+            .logo { font-size: 2rem; }
+            h1 { font-size: 1.4rem; }
+            .btn-call { font-size: 1.2rem; }
+            .features { flex-wrap: wrap; }
+            .feature { flex: 1 1 50%; }
+            .trust-badges { gap: 1rem; }
         }
     </style>
 </head>
@@ -289,50 +448,332 @@
     
     <div class="container">
         <div class="logo">Ride<span>ResQ</span></div>
-        <div class="tagline">Roadside help, instantly</div>
+        <div class="tagline">Denver Metro • 24/7</div>
         
-        <div class="status">
-            <span class="status-dot"></span>
-            Denver Metro — Available 24/7
-        </div>
-        
-        <div class="help-text">
-            Stuck on the road?
-        </div>
-        <div class="help-sub">
-            Text or call. We'll connect you with help in minutes.
-        </div>
-        
-        <a href="tel:+17206500250" class="cta-phone">
-            (720) 650-0250
-        </a>
-        
-        <div class="cta-sub">
-            Towing • Repairs • Jump starts • Lockouts
-        </div>
-        
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">🚛</div>
-                <div class="feature-text">Towing</div>
+        <!-- State: Initial -->
+        <div id="state-initial" class="state active">
+            <div class="status">
+                <span class="status-dot"></span>
+                Dispatchers Online
             </div>
-            <div class="feature">
-                <div class="feature-icon">🔧</div>
-                <div class="feature-text">Repairs</div>
+            
+            <h1>Car Trouble? Get Help Fast.</h1>
+            <p class="hero-sub">We connect you to <strong>trusted local operators</strong> with fair pricing and fast response. No hidden fees.</p>
+            
+            <div class="trust-badges">
+                <span class="trust-badge">Local Denver shops</span>
+                <span class="trust-badge">Fair pricing</span>
+                <span class="trust-badge">Fast response</span>
             </div>
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <div class="feature-text">Jump Start</div>
+            
+            <button class="btn btn-primary" onclick="requestLocation()">
+                📍 Share Location & Get Help
+            </button>
+            
+            <button class="btn btn-secondary" onclick="showManualEntry()">
+                Enter Address Manually
+            </button>
+            
+            <div class="estimate-card">
+                <div class="estimate-left">
+                    <span class="estimate-label">Example Quote</span>
+                    <span class="estimate-service">Tow to Downtown Denver</span>
+                </div>
+                <div class="estimate-right">
+                    <span class="estimate-price">$85–$140</span>
+                    <span class="estimate-eta">ETA ~20 min</span>
+                </div>
             </div>
-            <div class="feature">
-                <div class="feature-icon">🔑</div>
-                <div class="feature-text">Lockout</div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🚛</div>
+                    <div class="feature-text">Towing</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">Jump Start</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔧</div>
+                    <div class="feature-text">Flat Tire</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔑</div>
+                    <div class="feature-text">Lockout</div>
+                </div>
             </div>
+            
+            <p class="business-link">
+                <a href="/business">Tow operators & repair shops →</a>
+            </p>
         </div>
         
-        <p class="business-link">
-            <a href="/business">For tow operators & repair shops →</a>
-        </p>
+        <!-- State: Loading -->
+        <div id="state-loading" class="state">
+            <div class="spinner"></div>
+            <h1>Finding you...</h1>
+            <p>Getting your GPS location.</p>
+        </div>
+        
+        <!-- State: Confirm Location -->
+        <div id="state-confirm" class="state">
+            <div class="location-card">
+                <div class="location-label">📍 Your Location</div>
+                <div class="location-address" id="display-address">Loading...</div>
+                <div class="location-coords" id="display-coords"></div>
+            </div>
+            
+            <p>Is this where your vehicle is?</p>
+            
+            <div class="btn-group">
+                <button class="btn btn-confirm" onclick="confirmLocation()">Yes, Correct</button>
+                <button class="btn btn-wrong" onclick="showManualEntry()">No, Fix It</button>
+            </div>
+            
+            <p class="privacy-note">Your location is only used to send help.</p>
+        </div>
+        
+        <!-- State: Ready -->
+        <div id="state-ready" class="state">
+            <div class="emergency-banner">🚨 Emergency Mode Active</div>
+            
+            <h1>Got your location!</h1>
+            
+            <div class="location-card confirmed">
+                <div class="location-label">📍 Sending help to</div>
+                <div class="location-address" id="confirmed-address"></div>
+            </div>
+            
+            <p>Text us what happened — we'll handle the rest.</p>
+            
+            <a href="sms:+17206500250?body=I%20need%20help%20-%20" class="btn btn-primary btn-text">
+                Text Us Now
+            </a>
+            
+            <a href="tel:+17206500250" class="btn btn-secondary btn-call">
+                (720) 650-0250
+            </a>
+            
+            <div class="estimate-card">
+                <div class="estimate-left">
+                    <span class="estimate-label">Nearby Provider</span>
+                    <span class="estimate-service">Checking availability...</span>
+                </div>
+                <div class="estimate-right">
+                    <span class="estimate-eta">ETA ~15-25 min</span>
+                </div>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🚛</div>
+                    <div class="feature-text">Towing</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">Jump Start</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔧</div>
+                    <div class="feature-text">Flat Tire</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔑</div>
+                    <div class="feature-text">Lockout</div>
+                </div>
+            </div>
+            
+            <p class="business-link">
+                <a href="/business">Tow operators & repair shops →</a>
+            </p>
+        </div>
+        
+        <!-- State: Manual Entry -->
+        <div id="state-manual" class="state">
+            <h1>Where's your vehicle?</h1>
+            <p>Enter the address or nearest intersection.</p>
+            
+            <input type="text" class="manual-input" id="manual-address" 
+                   placeholder="e.g., 123 Main St, Denver" 
+                   autocomplete="street-address">
+            
+            <button class="btn btn-primary" onclick="submitManualAddress()">
+                Continue
+            </button>
+            
+            <button class="btn btn-secondary" onclick="requestLocation()">
+                📍 Use GPS Instead
+            </button>
+        </div>
+        
+        <!-- State: Error -->
+        <div id="state-error" class="state">
+            <div class="icon">⚠️</div>
+            <h1>Couldn't get location</h1>
+            <p id="error-message">Please allow location access or enter your address.</p>
+            
+            <button class="btn btn-primary" onclick="showManualEntry()">
+                Enter Address
+            </button>
+            
+            <button class="btn btn-secondary" onclick="requestLocation()">
+                Try GPS Again
+            </button>
+        </div>
     </div>
+    
+    <script>
+        let locationData = null;
+        
+        function showState(stateId) {
+            document.querySelectorAll('.state').forEach(s => s.classList.remove('active'));
+            document.getElementById(stateId).classList.add('active');
+        }
+        
+        function requestLocation() {
+            if (!navigator.geolocation) {
+                showError("Your browser doesn't support location sharing.");
+                return;
+            }
+            
+            showState('state-loading');
+            
+            navigator.geolocation.getCurrentPosition(
+                onLocationSuccess,
+                onLocationError,
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+            );
+        }
+        
+        async function onLocationSuccess(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const accuracy = position.coords.accuracy;
+            
+            locationData = { lat, lng, accuracy, source: 'gps' };
+            
+            document.getElementById('display-coords').textContent = 
+                `GPS: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+            
+            try {
+                const address = await reverseGeocode(lat, lng);
+                document.getElementById('display-address').textContent = address;
+                locationData.address = address;
+            } catch (e) {
+                const fallback = `Near ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+                document.getElementById('display-address').textContent = fallback;
+                locationData.address = fallback;
+            }
+            
+            showState('state-confirm');
+        }
+        
+        function onLocationError(error) {
+            let message = "Unable to get your location.";
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    message = "Location access denied. Please enter your address.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    message = "Location unavailable. Please enter your address.";
+                    break;
+                case error.TIMEOUT:
+                    message = "Location timed out. Please try again.";
+                    break;
+            }
+            showError(message);
+        }
+        
+        function showError(message) {
+            document.getElementById('error-message').textContent = message;
+            showState('state-error');
+        }
+        
+        async function reverseGeocode(lat, lng) {
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`,
+                { headers: { 'User-Agent': 'RideResQ/1.0' } }
+            );
+            if (!response.ok) throw new Error('Geocoding failed');
+            
+            const data = await response.json();
+            const addr = data.address;
+            const parts = [];
+            
+            if (addr.house_number && addr.road) {
+                parts.push(`${addr.house_number} ${addr.road}`);
+            } else if (addr.road) {
+                parts.push(addr.road);
+            }
+            if (addr.city || addr.town || addr.village) {
+                parts.push(addr.city || addr.town || addr.village);
+            }
+            if (addr.state) {
+                parts.push(addr.state);
+            }
+            return parts.join(', ') || data.display_name;
+        }
+        
+        function confirmLocation() {
+            storeLocation(locationData);
+            document.getElementById('confirmed-address').textContent = locationData.address;
+            showState('state-ready');
+        }
+        
+        function showManualEntry() {
+            showState('state-manual');
+            setTimeout(() => document.getElementById('manual-address').focus(), 100);
+        }
+        
+        async function submitManualAddress() {
+            const address = document.getElementById('manual-address').value.trim();
+            if (!address) { alert('Please enter an address.'); return; }
+            
+            locationData = { address, source: 'manual' };
+            showState('state-loading');
+            
+            try {
+                const coords = await geocodeAddress(address);
+                if (coords) {
+                    locationData.lat = coords.lat;
+                    locationData.lng = coords.lng;
+                }
+            } catch (e) {}
+            
+            storeLocation(locationData);
+            document.getElementById('confirmed-address').textContent = address;
+            showState('state-ready');
+        }
+        
+        async function geocodeAddress(address) {
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`,
+                { headers: { 'User-Agent': 'RideResQ/1.0' } }
+            );
+            if (!response.ok) return null;
+            const data = await response.json();
+            if (data.length === 0) return null;
+            return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+        }
+        
+        function storeLocation(data) {
+            const payload = { ...data, timestamp: new Date().toISOString(), userAgent: navigator.userAgent };
+            localStorage.setItem('rideresq_location', JSON.stringify(payload));
+            
+            const sessionId = new URLSearchParams(window.location.search).get('s');
+            if (sessionId) {
+                fetch('/api/location/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...payload, session_id: sessionId })
+                }).catch(() => {});
+            }
+        }
+        
+        document.getElementById('manual-address').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitManualAddress();
+        });
+    </script>
 </body>
 </html>

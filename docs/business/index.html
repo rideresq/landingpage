@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RideResQ for Business - Pay Only When You Get Work</title>
+    <title>RideResQ for Business - We Send You Jobs. AI Handles the Rest.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -21,11 +21,7 @@
             --success: #34c759;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'IBM Plex Mono', monospace;
@@ -34,28 +30,22 @@
             line-height: 1.6;
         }
         
-        /* Subtle grid overlay */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
                 linear-gradient(var(--steel) 1px, transparent 1px),
                 linear-gradient(90deg, var(--steel) 1px, transparent 1px);
             background-size: 60px 60px;
-            opacity: 0.15;
+            opacity: 0.1;
             pointer-events: none;
             z-index: 0;
         }
         
-        section {
-            position: relative;
-            z-index: 1;
-        }
+        section { position: relative; z-index: 1; }
         
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -65,24 +55,14 @@
             text-align: center;
             padding: 4rem 2rem;
             position: relative;
-            overflow: hidden;
         }
         
-        /* Hazard stripe accent */
         .hero::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             height: 4px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--amber) 0px,
-                var(--amber) 20px,
-                var(--asphalt) 20px,
-                var(--asphalt) 40px
-            );
+            background: repeating-linear-gradient(90deg, var(--amber) 0px, var(--amber) 20px, var(--asphalt) 20px, var(--asphalt) 40px);
         }
         
         .nav {
@@ -98,9 +78,7 @@
             font-size: 1.25rem;
         }
         
-        .nav a span {
-            color: var(--amber);
-        }
+        .nav a span { color: var(--amber); }
         
         .hero-badge {
             display: inline-block;
@@ -112,56 +90,35 @@
             letter-spacing: 2px;
             font-weight: 600;
             margin-bottom: 2rem;
-            animation: fadeDown 0.6s ease-out;
-        }
-        
-        @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         h1 {
             font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(2rem, 6vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            animation: fadeUp 0.6s ease-out 0.1s both;
         }
         
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .highlight {
-            color: var(--amber);
-            position: relative;
-        }
+        .highlight { color: var(--amber); }
         
         .subtitle {
             font-size: 1.1rem;
             color: var(--fog);
             max-width: 600px;
-            margin: 0 auto 3rem;
-            animation: fadeUp 0.6s ease-out 0.2s both;
+            margin: 0 auto 2rem;
         }
         
-        .value-prop {
-            display: inline-flex;
+        .subtitle strong { color: var(--headlight); }
+        
+        .hero-value {
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
             background: var(--concrete);
             border: 2px solid var(--amber);
             padding: 1rem 1.5rem;
             margin-bottom: 2rem;
-            animation: fadeUp 0.6s ease-out 0.25s both;
-        }
-        
-        .value-prop-icon {
-            font-size: 1.5rem;
-        }
-        
-        .value-prop-text {
             font-family: 'Archivo Black', sans-serif;
             font-size: 1.1rem;
         }
@@ -171,7 +128,6 @@
             gap: 1rem;
             flex-wrap: wrap;
             justify-content: center;
-            animation: fadeUp 0.6s ease-out 0.3s both;
         }
         
         .cta-button {
@@ -207,78 +163,57 @@
             color: var(--amber);
         }
         
-        /* How it's different */
-        .difference-section {
+        /* Flow diagram */
+        .flow-section {
             background: var(--concrete);
-            padding: 5rem 2rem;
-            border-top: 1px solid var(--steel);
-            border-bottom: 1px solid var(--steel);
+            padding: 4rem 2rem;
+            text-align: center;
         }
         
-        .difference-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px;
-            background: var(--steel);
-        }
-        
-        .difference-card {
-            background: var(--asphalt);
-            padding: 2.5rem;
-        }
-        
-        .difference-card.old {
-            opacity: 0.6;
-        }
-        
-        .difference-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-        }
-        
-        .difference-card.old .difference-label {
-            color: var(--danger);
-        }
-        
-        .difference-card.new .difference-label {
-            color: var(--success);
-        }
-        
-        .difference-card h3 {
+        .flow-title {
             font-family: 'Archivo Black', sans-serif;
             font-size: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 3rem;
         }
         
-        .difference-card ul {
-            list-style: none;
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .difference-card li {
-            padding: 0.5rem 0;
-            color: var(--fog);
+        .flow-box {
+            background: var(--asphalt);
+            border: 2px solid var(--steel);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            min-width: 180px;
+        }
+        
+        .flow-box.highlight-box {
+            border-color: var(--amber);
+            background: var(--amber-glow);
+        }
+        
+        .flow-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        
+        .flow-label {
+            font-family: 'Archivo Black', sans-serif;
             font-size: 0.9rem;
         }
         
-        .difference-card.old li::before {
-            content: '✗ ';
-            color: var(--danger);
+        .flow-arrow {
+            font-size: 2rem;
+            color: var(--amber);
         }
         
-        .difference-card.new li::before {
-            content: '✓ ';
-            color: var(--success);
-        }
-        
-        /* AI Section */
-        .ai-section {
-            padding: 6rem 2rem;
-            max-width: 900px;
-            margin: 0 auto;
+        /* Difference section */
+        .difference-section {
+            padding: 5rem 2rem;
         }
         
         .section-label {
@@ -287,18 +222,68 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 1rem;
+            text-align: center;
         }
         
         h2 {
             font-family: 'Archivo Black', sans-serif;
             font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .difference-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            background: var(--steel);
+        }
+        
+        .difference-card {
+            background: var(--concrete);
+            padding: 2.5rem;
+        }
+        
+        .difference-card.old { opacity: 0.7; }
+        
+        .difference-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             margin-bottom: 1rem;
         }
         
-        .section-subtitle {
+        .difference-card.old .difference-label { color: var(--danger); }
+        .difference-card.new .difference-label { color: var(--success); }
+        
+        .difference-card h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .difference-card ul { list-style: none; }
+        
+        .difference-card li {
+            padding: 0.5rem 0;
             color: var(--fog);
-            margin-bottom: 3rem;
-            max-width: 600px;
+            font-size: 0.9rem;
+        }
+        
+        .difference-card.old li::before { content: '✗ '; color: var(--danger); }
+        .difference-card.new li::before { content: '✓ '; color: var(--success); }
+        
+        /* AI Section */
+        .ai-section {
+            background: var(--concrete);
+            padding: 5rem 2rem;
+        }
+        
+        .ai-content {
+            max-width: 900px;
+            margin: 0 auto;
         }
         
         .ai-grid {
@@ -310,19 +295,11 @@
         }
         
         .ai-card {
-            background: var(--concrete);
+            background: var(--asphalt);
             padding: 2rem;
-            transition: background 0.2s ease;
         }
         
-        .ai-card:hover {
-            background: var(--steel);
-        }
-        
-        .ai-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
+        .ai-icon { font-size: 2rem; margin-bottom: 1rem; }
         
         .ai-card h3 {
             font-family: 'Archivo Black', sans-serif;
@@ -340,90 +317,16 @@
             background: var(--amber-glow);
             border: 1px solid var(--amber);
             color: var(--amber);
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             padding: 2px 8px;
             margin-top: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
-        /* How it works */
-        .how-section {
-            background: var(--concrete);
-            padding: 6rem 2rem;
-        }
-        
-        .how-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        .step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 24px;
-            top: 60px;
-            bottom: -30px;
-            width: 1px;
-            background: linear-gradient(to bottom, var(--amber), transparent);
-        }
-        
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: var(--amber);
-            color: var(--asphalt);
-            font-family: 'Archivo Black', sans-serif;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
-        }
-        
-        .step-content h3 {
-            font-family: 'Archivo Black', sans-serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .step-content p {
-            color: var(--fog);
-            font-size: 0.9rem;
-        }
-        
-        .step-demo {
-            background: var(--asphalt);
-            border: 1px solid var(--steel);
-            padding: 1rem;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-        }
-        
-        .step-demo .sms {
-            color: var(--amber);
-        }
-        
-        .step-demo .ai-label {
-            color: var(--success);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        
         /* Pricing */
         .pricing-section {
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
         }
         
@@ -469,13 +372,17 @@
             margin-bottom: 0.5rem;
         }
         
-        .price-highlight {
-            color: var(--amber);
-        }
+        .price-highlight { color: var(--amber); }
         
         .price-note {
             color: var(--fog);
             font-size: 0.9rem;
+        }
+        
+        .price-detail {
+            color: var(--headlight);
+            font-size: 1rem;
+            margin-top: 0.5rem;
         }
         
         .pricing-breakdown {
@@ -492,21 +399,10 @@
             font-size: 0.9rem;
         }
         
-        .breakdown-item:last-child {
-            border-bottom: none;
-        }
-        
-        .breakdown-item .label {
-            color: var(--fog);
-        }
-        
-        .breakdown-item .value {
-            font-weight: 600;
-        }
-        
-        .breakdown-item .value.free {
-            color: var(--success);
-        }
+        .breakdown-item:last-child { border-bottom: none; }
+        .breakdown-item .label { color: var(--fog); }
+        .breakdown-item .value { font-weight: 600; }
+        .breakdown-item .value.free { color: var(--success); }
         
         .pricing-features {
             padding: 2rem;
@@ -529,9 +425,7 @@
             font-weight: bold;
         }
         
-        .pricing-cta {
-            padding: 0 2rem 2rem;
-        }
+        .pricing-cta { padding: 0 2rem 2rem; }
         
         .pricing-cta .cta-button {
             width: 100%;
@@ -545,49 +439,29 @@
             color: var(--fog);
         }
         
-        .guarantee strong {
-            color: var(--success);
-        }
+        .guarantee strong { color: var(--success); }
         
         /* Final CTA */
         .final-cta {
             background: linear-gradient(to bottom, var(--concrete), var(--asphalt));
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
-            position: relative;
         }
         
         .final-cta::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 4px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--amber) 0px,
-                var(--amber) 20px,
-                var(--asphalt) 20px,
-                var(--asphalt) 40px
-            );
+            background: repeating-linear-gradient(90deg, var(--amber) 0px, var(--amber) 20px, var(--asphalt) 20px, var(--asphalt) 40px);
         }
         
-        .final-cta h2 {
-            margin-bottom: 1rem;
-        }
-        
-        .final-cta p {
-            color: var(--fog);
-            margin-bottom: 2rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .final-cta h2 { margin-bottom: 1rem; }
+        .final-cta p { color: var(--fog); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
         
         .phone-display {
             font-family: 'Archivo Black', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--amber);
             margin-top: 2rem;
         }
@@ -601,37 +475,15 @@
             color: var(--fog);
         }
         
-        footer a {
-            color: var(--amber);
-            text-decoration: none;
-        }
+        footer a { color: var(--amber); text-decoration: none; }
         
         @media (max-width: 700px) {
-            .nav {
-                position: static;
-                margin-bottom: 2rem;
-            }
-            
-            .difference-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .step {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .step:not(:last-child)::after {
-                display: none;
-            }
-            
-            .price {
-                font-size: 2rem;
-            }
-            
-            .phone-display {
-                font-size: 1.75rem;
-            }
+            .nav { position: static; margin-bottom: 2rem; }
+            .difference-grid { grid-template-columns: 1fr; }
+            .flow-diagram { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+            .price { font-size: 2rem; }
+            .phone-display { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -641,26 +493,57 @@
             <a href="/">Ride<span>ResQ</span></a>
         </nav>
         
-        <div class="hero-badge">Pay Only When You Get Work</div>
+        <div class="hero-badge">We Send You Jobs. AI Handles the Rest.</div>
         
-        <h1>Your AI-Powered<br><span class="highlight">Dispatch Team</span></h1>
+        <h1>More Jobs.<br><span class="highlight">Zero Busywork.</span></h1>
         
         <p class="subtitle">
-            We handle your calls, texts, and scheduling with AI — and you only pay when a customer actually shows up for service.
+            We bring you <strong>stranded drivers who need help now</strong>. Our AI handles their calls, texts, and scheduling. You just show up and get paid.
         </p>
         
-        <div class="value-prop">
-            <span class="value-prop-icon">🎯</span>
-            <span class="value-prop-text">$0 upfront. $0 monthly. Pay per job.</span>
+        <div class="hero-value">
+            🎯 $0 upfront • $0 monthly • Pay 10-15% per completed job
         </div>
         
         <div class="cta-group">
-            <a href="#pricing" class="cta-button cta-primary">See How It Works →</a>
-            <a href="sms:+17206500250?body=I%27m%20interested%20in%20RideResQ%20for%20my%20business" class="cta-button cta-secondary">Text Us Now</a>
+            <a href="#pricing" class="cta-button cta-primary">Get Started Free →</a>
+            <a href="sms:+17206500250?body=I%27m%20a%20tow%2Frepair%20shop%20interested%20in%20RideResQ" class="cta-button cta-secondary">Text Us</a>
         </div>
     </section>
     
+    <section class="flow-section">
+        <div class="flow-title">Where Do the Jobs Come From?</div>
+        
+        <div class="flow-diagram">
+            <div class="flow-box">
+                <div class="flow-icon">🚗</div>
+                <div class="flow-label">Driver Needs Help</div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <div class="flow-box highlight-box">
+                <div class="flow-icon">🤖</div>
+                <div class="flow-label">RideResQ AI</div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <div class="flow-box">
+                <div class="flow-icon">🔧</div>
+                <div class="flow-label">Your Business</div>
+            </div>
+        </div>
+        
+        <p style="color: var(--fog); margin-top: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+            We capture demand from stranded drivers in real-time and route jobs to nearby providers. You don't find customers — we bring them to you.
+        </p>
+    </section>
+    
     <section class="difference-section">
+        <div class="section-label">Why It's Different</div>
+        <h2>Outcome-as-a-Service</h2>
+        
         <div class="difference-grid">
             <div class="difference-card old">
                 <div class="difference-label">The Old Way</div>
@@ -668,110 +551,57 @@
                 <ul>
                     <li>$200-500/month whether you use it or not</li>
                     <li>Pay even when business is slow</li>
-                    <li>You still do all the work</li>
-                    <li>Complicated setup and training</li>
+                    <li>You still answer every call</li>
+                    <li>You still chase every lead</li>
                     <li>Another tool to manage</li>
                 </ul>
             </div>
             <div class="difference-card new">
                 <div class="difference-label">The RideResQ Way</div>
-                <h3>Outcome-as-a-Service</h3>
+                <h3>Pay Only for Results</h3>
                 <ul>
-                    <li>Pay only when you complete a job</li>
-                    <li>Slow month? You pay nothing.</li>
-                    <li>AI handles calls, texts, scheduling</li>
-                    <li>We set everything up for you</li>
-                    <li>We work for you, not the other way around</li>
+                    <li>10-15% only when you complete a job</li>
+                    <li>Slow month? You pay nothing</li>
+                    <li>AI handles calls and texts</li>
+                    <li>We bring you qualified leads</li>
+                    <li>We work for you</li>
                 </ul>
             </div>
         </div>
     </section>
     
     <section class="ai-section">
-        <div class="section-label">AI-Powered Operations</div>
-        <h2>Your 24/7 Dispatch Team</h2>
-        <p class="section-subtitle">
-            Our AI handles the busywork so you can focus on what you're good at — fixing cars and running tows.
-        </p>
-        
-        <div class="ai-grid">
-            <div class="ai-card">
-                <div class="ai-icon">📞</div>
-                <h3>Phone Calls</h3>
-                <p>AI answers when you can't. Captures caller info, understands the problem, and keeps them engaged.</p>
-                <span class="ai-tag">AI Voice</span>
-            </div>
-            <div class="ai-card">
-                <div class="ai-icon">💬</div>
-                <h3>SMS Conversations</h3>
-                <p>Instant text-back on missed calls. AI continues the conversation naturally until you're ready.</p>
-                <span class="ai-tag">AI Chat</span>
-            </div>
-            <div class="ai-card">
-                <div class="ai-icon">📅</div>
-                <h3>Scheduling</h3>
-                <p>AI books appointments based on your real availability. No double-bookings, no phone tag.</p>
-                <span class="ai-tag">AI Scheduler</span>
-            </div>
-            <div class="ai-card">
-                <div class="ai-icon">🔔</div>
-                <h3>Reminders</h3>
-                <p>Automated confirmations and reminders reduce no-shows by up to 40%.</p>
-                <span class="ai-tag">Automated</span>
-            </div>
-            <div class="ai-card">
-                <div class="ai-icon">📍</div>
-                <h3>Dispatch Routing</h3>
-                <p>For tow operators: AI captures location and routes jobs to available drivers.</p>
-                <span class="ai-tag">AI Dispatch</span>
-            </div>
-            <div class="ai-card">
-                <div class="ai-icon">📊</div>
-                <h3>Lead Tracking</h3>
-                <p>See every conversation, every lead, every booked job in one dashboard.</p>
-                <span class="ai-tag">Dashboard</span>
-            </div>
-        </div>
-    </section>
-    
-    <section class="how-section" id="how">
-        <div class="how-content">
-            <div class="section-label">How It Works</div>
-            <h2>From Missed Call to Completed Job</h2>
+        <div class="ai-content">
+            <div class="section-label">AI-Powered Operations</div>
+            <h2>Your 24/7 Dispatch Team</h2>
+            <p style="color: var(--fog); text-align: center; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Our AI handles the busywork so you can focus on what you're good at — fixing cars and running tows.
+            </p>
             
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Customer calls or texts</h3>
-                    <p>Whether you answer or not, our AI captures every lead.</p>
+            <div class="ai-grid">
+                <div class="ai-card">
+                    <div class="ai-icon">📞</div>
+                    <h3>Answers Calls</h3>
+                    <p>AI picks up when you can't. Captures info, understands the problem, keeps them engaged.</p>
+                    <span class="ai-tag">AI Voice</span>
                 </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>AI handles the conversation</h3>
-                    <p>Understands their problem, answers questions, and books the appointment:</p>
-                    <div class="step-demo">
-                        <span class="ai-label">AI Response</span>
-                        <span class="sms">"Got it — sounds like a dead battery. We can have someone there in about 45 minutes, or I can schedule you for first thing tomorrow. What works better?"</span>
-                    </div>
+                <div class="ai-card">
+                    <div class="ai-icon">💬</div>
+                    <h3>Handles Texts</h3>
+                    <p>Instant responses to customer messages. Natural conversation until you're ready.</p>
+                    <span class="ai-tag">AI Chat</span>
                 </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>You get notified</h3>
-                    <p>New job alert with all the details — customer info, vehicle, issue, scheduled time. Just show up and do the work.</p>
+                <div class="ai-card">
+                    <div class="ai-icon">📅</div>
+                    <h3>Books Jobs</h3>
+                    <p>Schedules based on your real availability. No double-bookings, no phone tag.</p>
+                    <span class="ai-tag">AI Scheduler</span>
                 </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Job completed? Then you pay.</h3>
-                    <p>Only when the work is done and you've been paid do we take our cut. If they no-show or cancel, you owe nothing.</p>
+                <div class="ai-card">
+                    <div class="ai-icon">📍</div>
+                    <h3>Routes Jobs</h3>
+                    <p>For tow operators: captures location and dispatches to available drivers.</p>
+                    <span class="ai-tag">AI Dispatch</span>
                 </div>
             </div>
         </div>
@@ -784,8 +614,9 @@
         <div class="pricing-card">
             <div class="pricing-header">
                 <div class="pricing-model">Outcome-Based Pricing</div>
-                <div class="price">Small Fee <span class="price-highlight">Per Completed Job</span></div>
-                <div class="price-note">No monthly fees. No setup fees. No risk.</div>
+                <div class="price"><span class="price-highlight">10-15%</span> per job</div>
+                <div class="price-note">Only when you complete a job and get paid.</div>
+                <div class="price-detail">Less than the cost of one missed call.</div>
             </div>
             
             <div class="pricing-breakdown">
@@ -799,7 +630,7 @@
                 </div>
                 <div class="breakdown-item">
                     <span class="label">Per completed job</span>
-                    <span class="value">Small %</span>
+                    <span class="value">10-15%</span>
                 </div>
                 <div class="breakdown-item">
                     <span class="label">Cancelled / no-show jobs</span>
@@ -808,17 +639,17 @@
             </div>
             
             <ul class="pricing-features">
+                <li>Jobs sent to you in real-time</li>
                 <li>AI-powered phone answering</li>
                 <li>24/7 SMS customer handling</li>
-                <li>Automated scheduling & booking</li>
-                <li>Appointment reminders</li>
-                <li>Full conversation dashboard</li>
+                <li>Automated scheduling</li>
+                <li>Provider app with dashboard</li>
                 <li>Works with your existing number</li>
             </ul>
             
             <div class="pricing-cta">
                 <a href="sms:+17206500250?body=I%27m%20interested%20in%20RideResQ%20for%20my%20business" class="cta-button cta-primary">
-                    Get Started — It's Free
+                    Start Getting Jobs — Free
                 </a>
                 <p class="guarantee"><strong>Zero risk.</strong> You only pay when you make money.</p>
             </div>
@@ -826,8 +657,8 @@
     </section>
     
     <section class="final-cta" id="contact">
-        <h2>Ready to stop missing jobs?</h2>
-        <p>Text us now. We'll get you set up today — and you won't pay a dime until you start completing jobs.</p>
+        <h2>Ready to get more jobs?</h2>
+        <p>Text us now. We'll get you set up today — you could be receiving jobs within hours.</p>
         
         <a href="sms:+17206500250?body=I%27m%20interested%20in%20RideResQ%20for%20my%20business" class="cta-button cta-primary">
             Text Us to Get Started
