@@ -1,73 +1,74 @@
 # RideResQ Landing Page
 
-Marketing website for RideResQ — AI-powered dispatch for tow operators and repair shops.
+Marketing website for RideResQ — AI-powered roadside assistance marketplace.
 
 🌐 **Live:** [rideresq.com](https://rideresq.com)
 
 ## Overview
 
 This repo contains the public-facing marketing site:
-- **Customer page** (`/`) — For stranded drivers needing help
-- **Business page** (`/business`) — For tow operators and repair shops to sign up
+- **Consumer page** (`/`) — For stranded drivers needing help
+- **Business page** (`/business`) — For tow operators and repair shops to partner
+
+## Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   THIS SITE     │────►│   BACKEND API   │◄────│  ELEVENLABS     │
+│   rideresq.com  │     │ api.rideresq.com│     │  Voice Agent    │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+```
+
+**Consumer flow:**
+1. User lands on site → shares GPS location
+2. Site POSTs to `api.rideresq.com/api/sessions/create`
+3. User calls (720) 650-0250
+4. ElevenLabs agent handles call, dispatches help
 
 ## Structure
 
 ```
-docs/                    # GitHub Pages root
-├── index.html           # Customer landing page
-└── business/
-    └── index.html       # B2B sales page
-schema.sql               # Database schema (reference)
+docs/                        # GitHub Pages root
+├── index.html               # Consumer landing (GPS capture + call CTA)
+├── business/
+│   └── index.html           # B2B partner signup page
+elevenlabs/
+├── agent-config.json        # Voice agent configuration
+├── README.md                # Agent documentation
+├── LOCATION-FLOW.md         # Location capture flow docs
 ```
+
+## Key Features
+
+**Consumer page:**
+- GPS location capture on first tap
+- "AI finds you the best price" messaging
+- Trust badges (Local shops, Fair pricing, No hidden fees)
+- Live estimate card with price comparison
+- Emergency Mode banner after location confirmed
+
+**Business page:**
+- "We Send You Jobs. AI Handles the Rest."
+- Visual flow diagram (Driver → RideResQ AI → Your Business)
+- Clear pricing: 10-15% per completed job
+- AI profit messaging (+$500/mo saved jobs, 2+ hrs/day saved)
 
 ## Deployment
 
 Hosted via **GitHub Pages** from the `docs/` folder on `main` branch.
 
-Any push to `main` automatically deploys.
-
-### DNS Setup
-
-Point `rideresq.com` to GitHub Pages:
-- A record: `185.199.108.153` (and .109, .110, .111)
-- Or CNAME: `rideresq.github.io`
-
-## Design
-
-**Aesthetic:** Industrial roadside — dark asphalt tones, amber warning colors, hazard stripes
-
-**Fonts:**
-- Archivo Black (headlines)
-- IBM Plex Mono (body)
-
-**Key colors:**
-- `--asphalt: #0d0d0f`
-- `--amber: #ffb800`
-- `--headlight: #f0f0f0`
-
-## Business Model
-
-**Outcome-as-a-Service** — Providers pay only when they complete a job. No monthly fees, no setup fees.
-
-**Target customers:**
-- Tow truck operators
-- Auto repair shops
-- Roadside assistance providers
-
-**Market:** Denver metro (initial), expanding to surrounding areas
-
-## Contact
-
-Business line: **(720) 650-0250**
+Push to `main` → automatically deploys.
 
 ## Related Repos
 
-| Repo | Description | Access |
-|------|-------------|--------|
-| `rideresq/app` | Provider mobile app (PWA + Capacitor) | Private |
-| `rideresq/providers` | Prospect lists and provider data | Private |
-| `rideresq/api` | FastAPI backend (coming soon) | Private |
+| Repo | Purpose |
+|------|---------|
+| [rideresq/backend](https://github.com/rideresq/backend) | FastAPI + Postgres (api.rideresq.com) |
+| [rideresq/app](https://github.com/rideresq/app) | Provider PWA + mobile app (private) |
+| [rideresq/providers](https://github.com/rideresq/providers) | Prospect lists (private) |
 
-## License
+## Contact
 
-Proprietary. All rights reserved.
+- **Phone:** (720) 650-0250
+- **Domain:** rideresq.com
+- **API:** api.rideresq.com
