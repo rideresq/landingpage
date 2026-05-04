@@ -2,9 +2,29 @@
 
 ## What This Is
 
-The public marketing site for RideResQ. Two pages:
-1. Customer-facing (`/`) — stranded drivers text/call for help
-2. Business-facing (`/business`) — tow/repair shops sign up
+Public marketing site for RideResQ — AI-powered roadside assistance marketplace.
+
+Two pages:
+1. **Consumer** (`/`) — Stranded drivers share location, then call for help
+2. **Business** (`/business`) — Tow/repair shops sign up as partners
+
+## Architecture
+
+```
+User visits rideresq.com
+        │
+        ▼
+   Shares GPS location
+        │
+        ▼
+POST api.rideresq.com/api/sessions/create  ←── THIS SITE DOES THIS
+        │
+        ▼
+   User calls (720) 650-0250
+        │
+        ▼
+   ElevenLabs voice agent handles call
+```
 
 ## Quick Commands
 
@@ -18,13 +38,35 @@ git push origin main
 
 ## Key Files
 
-- `docs/index.html` — Customer landing page
-- `docs/business/index.html` — B2B sales/signup page
-- `schema.sql` — Database schema (for reference, actual DB is in API repo)
+| File | Purpose |
+|------|---------|
+| `docs/index.html` | Consumer landing (GPS capture + call CTA) |
+| `docs/business/index.html` | B2B partner signup page |
+| `elevenlabs/agent-config.json` | Voice agent configuration |
+| `elevenlabs/README.md` | Agent documentation |
+
+## Backend Integration
+
+The site POSTs to `api.rideresq.com` when user shares location:
+
+```javascript
+// In docs/index.html → storeLocation()
+fetch('https://api.rideresq.com/api/sessions/create', {
+    method: 'POST',
+    body: JSON.stringify({
+        latitude: data.lat,
+        longitude: data.lng,
+        address: data.address,
+        location_source: 'gps'
+    })
+});
+```
+
+Session ID stored in `localStorage` for later use.
 
 ## Design System
 
-Follow the existing aesthetic. Do NOT use generic fonts or purple gradients.
+**DO NOT** deviate from the established aesthetic.
 
 **Fonts:**
 - `Archivo Black` — Headlines only
@@ -46,41 +88,39 @@ Follow the existing aesthetic. Do NOT use generic fonts or purple gradients.
 - Hazard stripes (black/amber repeating gradient)
 - Angled clip-path buttons
 - Grid overlay on backgrounds
-- Staggered fade-up animations on load
 
 ## Phone Number
 
-Business line: `(720) 650-0250`
+**(720) 650-0250** — ElevenLabs voice agent
 
-If updating, change in BOTH:
-- `docs/index.html`
-- `docs/business/index.html`
+If updating, change in BOTH pages. Search for `720`.
 
-Search for `720` to find all instances.
-
-## Pricing Model
+## Pricing Model (for /business page)
 
 **Outcome-as-a-Service:**
-- $0 setup
-- $0 monthly
-- Small % per completed job
-- If customer no-shows or cancels, provider pays nothing
+- $0 setup, $0 monthly
+- 10-15% per completed job
+- If customer cancels, provider pays nothing
 
-## Deploy Keys
+## Deploy
 
-Deploy key is stored locally, not in repo. If you need to push:
+Push to `main` → GitHub Pages auto-deploys.
+
 ```bash
-GIT_SSH_COMMAND="ssh -i ./landingpage_deploy_key -o IdentitiesOnly=yes" git push origin main
+GIT_SSH_COMMAND="ssh -i ~/.rideresq-keys/landing_key_v3 -o IdentitiesOnly=yes" git push origin main
 ```
 
 ## Related Repos
 
-- `rideresq/app` — Provider mobile app
-- `rideresq/providers` — Prospect data
-- `rideresq/api` — Backend (coming soon)
+| Repo | Purpose |
+|------|---------|
+| `rideresq/backend` | FastAPI + Postgres (api.rideresq.com) |
+| `rideresq/app` | Provider PWA + mobile app |
+| `rideresq/providers` | Prospect lists (private) |
 
 ## Don't
 
 - Don't commit API keys or secrets
 - Don't change the visual aesthetic without discussion
-- Don't remove the hazard stripe motif — it's the brand identity
+- Don't use generic fonts (Inter, Roboto)
+- Don't break the hazard stripe motif
