@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadside Assistance Denver | AI-Powered | No Membership | RideResQ</title>
+    <meta name="description" content="RideResQ is AI-powered roadside assistance in Denver. No membership fees, no surge pricing. Towing, jump starts, lockouts, flat tires — help in 15-25 minutes.">
+    <link rel="canonical" href="https://rideresq.com/roadside-assistance-denver/">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Roadside Assistance",
+        "provider": { "@type": "Organization", "name": "RideResQ" },
+        "areaServed": { "@type": "Place", "name": "Denver Metro Area, Colorado" },
+        "description": "AI-powered roadside assistance in Denver. No membership, no surge pricing. Towing, jump starts, lockouts, flat tires.",
+        "offers": { "@type": "Offer", "priceRange": "$45-$150", "priceCurrency": "USD" }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is RideResQ?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "RideResQ is an AI-powered roadside assistance platform that connects stranded drivers in Denver to local towing companies and service providers without surge pricing or membership fees."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How is RideResQ different from AAA?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Unlike AAA, RideResQ has no annual membership fee. You only pay when you need help. Our AI-powered dispatch provides transparent pricing upfront, so you know the cost before you commit."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does RideResQ charge surge pricing?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. RideResQ never charges surge pricing. We connect you directly with local providers at their standard rates, helping you avoid predatory pricing."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What services does RideResQ offer?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "RideResQ connects you with local providers for towing ($85-$140), jump starts ($45-$75), flat tire changes ($55-$95), car lockouts ($50-$85), and fuel delivery ($55-$85) throughout Denver."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --asphalt: #0d0d0f;
+            --concrete: #1a1a1e;
+            --steel: #2a2a32;
+            --amber: #ffb800;
+            --headlight: #f0f0f0;
+            --fog: #888894;
+            --success: #34c759;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--asphalt);
+            color: var(--headlight);
+            line-height: 1.7;
+        }
+        .container { max-width: 700px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: var(--headlight);
+        }
+        .logo span { color: var(--amber); }
+        header {
+            border-bottom: 1px solid var(--steel);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.3rem;
+            color: var(--amber);
+            margin: 2rem 0 1rem;
+        }
+        p { color: var(--fog); margin-bottom: 1rem; }
+        strong { color: var(--headlight); }
+        ul, ol { color: var(--fog); padding-left: 1.5rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .services {
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .service-card {
+            background: var(--concrete);
+            border: 1px solid var(--steel);
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .service-card:hover { border-color: var(--amber); }
+        .service-name {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+        }
+        .service-price {
+            color: var(--amber);
+            font-weight: 600;
+        }
+        .service-icon { font-size: 1.5rem; margin-right: 0.75rem; }
+        .service-left { display: flex; align-items: center; }
+        .cta {
+            display: block;
+            background: var(--amber);
+            color: var(--asphalt);
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.2rem;
+            padding: 1.25rem 2rem;
+            text-decoration: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .cta:hover { background: var(--headlight); }
+        .comparison {
+            margin: 2rem 0;
+        }
+        .comparison table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .comparison th, .comparison td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--steel);
+        }
+        .comparison th {
+            color: var(--amber);
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.85rem;
+        }
+        .comparison td { color: var(--fog); }
+        .comparison .check { color: var(--success); }
+        .comparison .x { color: var(--fog); opacity: 0.5; }
+        .faq { margin: 2rem 0; }
+        .faq-item {
+            background: var(--concrete);
+            border-left: 3px solid var(--amber);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .faq-item h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .faq-item p { margin-bottom: 0; }
+        footer {
+            border-top: 1px solid var(--steel);
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        footer p { font-size: 0.8rem; }
+        footer a { color: var(--amber); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">Ride<span>ResQ</span></a>
+        </header>
+        
+        <h1>AI-Powered Roadside Assistance in Denver</h1>
+        
+        <p><strong>RideResQ is roadside assistance built for 2026</strong> — no membership fees, no surge pricing, just help when you need it. Our AI connects you with vetted local providers at transparent prices.</p>
+        
+        <a href="/" class="cta">📍 Get Help Now</a>
+        
+        <h2>Services & Pricing</h2>
+        <div class="services">
+            <a href="/towing-denver/" class="service-card">
+                <div class="service-left">
+                    <span class="service-icon">🚛</span>
+                    <span class="service-name">Towing</span>
+                </div>
+                <span class="service-price">$85–$140</span>
+            </a>
+            <a href="/jump-start-denver/" class="service-card">
+                <div class="service-left">
+                    <span class="service-icon">⚡</span>
+                    <span class="service-name">Jump Start</span>
+                </div>
+                <span class="service-price">$45–$75</span>
+            </a>
+            <a href="/flat-tire-denver/" class="service-card">
+                <div class="service-left">
+                    <span class="service-icon">🔧</span>
+                    <span class="service-name">Flat Tire</span>
+                </div>
+                <span class="service-price">$55–$95</span>
+            </a>
+            <a href="/lockout-denver/" class="service-card">
+                <div class="service-left">
+                    <span class="service-icon">🔑</span>
+                    <span class="service-name">Lockout</span>
+                </div>
+                <span class="service-price">$50–$85</span>
+            </a>
+            <div class="service-card">
+                <div class="service-left">
+                    <span class="service-icon">⛽</span>
+                    <span class="service-name">Fuel Delivery</span>
+                </div>
+                <span class="service-price">$55–$85</span>
+            </div>
+        </div>
+        
+        <h2>How RideResQ Works</h2>
+        <ol>
+            <li><strong>Share your location</strong> — GPS or enter your address</li>
+            <li><strong>AI finds nearby providers</strong> — Vetted local tow trucks and services</li>
+            <li><strong>See transparent pricing</strong> — Know the cost before you commit</li>
+            <li><strong>Get connected</strong> — Help arrives in 15-25 minutes on average</li>
+        </ol>
+        
+        <h2>RideResQ vs AAA vs Surge Pricing</h2>
+        <div class="comparison">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>RideResQ</th>
+                    <th>AAA</th>
+                    <th>Surge Services</th>
+                </tr>
+                <tr>
+                    <td>Annual fee</td>
+                    <td class="check">$0</td>
+                    <td>$60–$150/yr</td>
+                    <td class="check">$0</td>
+                </tr>
+                <tr>
+                    <td>Surge pricing</td>
+                    <td class="check">Never</td>
+                    <td class="check">Never</td>
+                    <td class="x">Yes, 2-3x</td>
+                </tr>
+                <tr>
+                    <td>Upfront pricing</td>
+                    <td class="check">Yes</td>
+                    <td class="x">Varies</td>
+                    <td class="x">After service</td>
+                </tr>
+                <tr>
+                    <td>Local providers</td>
+                    <td class="check">Yes</td>
+                    <td>Mixed</td>
+                    <td>Mixed</td>
+                </tr>
+                <tr>
+                    <td>Average response</td>
+                    <td>15-25 min</td>
+                    <td>30-60 min</td>
+                    <td>20-40 min</td>
+                </tr>
+            </table>
+        </div>
+        
+        <h2>Denver Metro Coverage</h2>
+        <p>RideResQ serves the entire Denver Metro area:</p>
+        <ul>
+            <li><strong>Downtown:</strong> LoDo, Capitol Hill, RiNo, Five Points</li>
+            <li><strong>West:</strong> Lakewood, Arvada, Wheat Ridge, Golden</li>
+            <li><strong>East:</strong> Aurora, Centennial, Parker</li>
+            <li><strong>North:</strong> Westminster, Thornton, Broomfield, Boulder</li>
+            <li><strong>South:</strong> Littleton, Englewood, Highlands Ranch, Castle Rock</li>
+            <li><strong>Highways:</strong> I-25, I-70, I-225, I-270, US-36, C-470</li>
+        </ul>
+        
+        <a href="/" class="cta">📍 Get Help Now</a>
+        
+        <div class="faq">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <h3>What is RideResQ?</h3>
+                <p>RideResQ is an AI-powered roadside assistance platform that connects stranded drivers in Denver to local towing companies and service providers without surge pricing or membership fees.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>How is RideResQ different from AAA?</h3>
+                <p>Unlike AAA, RideResQ has no annual membership fee — you only pay when you need help. Our AI provides transparent pricing upfront, so you know the cost before you commit.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Does RideResQ charge surge pricing?</h3>
+                <p>No. RideResQ never charges surge pricing. We connect you directly with local providers at their standard rates.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>How fast can I get help?</h3>
+                <p>Average response time in the Denver Metro area is 15-25 minutes, depending on your location and provider availability.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>How do I pay?</h3>
+                <p>You pay the provider directly when service is complete. Most accept credit cards, debit cards, and cash.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p><a href="/">← Back to RideResQ</a></p>
+            <p>RideResQ — AI-powered roadside assistance for Denver Metro.</p>
+            <p>© 2026 RideResQ. Denver, Colorado.</p>
+        </footer>
+    </div>
+</body>
+</html>
