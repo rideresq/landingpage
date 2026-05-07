@@ -1,0 +1,80 @@
+# Denver, Colorado - GEO Page Config (current live config)
+city: Denver
+state: Colorado
+state_abbr: CO
+metro: Denver Metro Area
+phone: "+1-720-650-0250"
+timezone: Mountain
+
+pricing:
+  tow_min: 85
+  tow_max: 140
+  tow_surge: 180
+  jump_min: 45
+  jump_max: 75
+  flat_min: 55
+  flat_max: 95
+  lockout_min: 50
+  lockout_max: 85
+  fuel_min: 55
+  fuel_max: 85
+
+eta_min: 15
+eta_max: 25
+
+areas:
+  central:
+    - Downtown Denver
+    - LoDo
+    - Capitol Hill
+    - RiNo
+    - Five Points
+    - Cherry Creek
+  west:
+    - Lakewood
+    - Arvada
+    - Wheat Ridge
+    - Golden
+    - Morrison
+  east:
+    - Aurora
+    - Centennial
+    - Parker
+  north:
+    - Westminster
+    - Thornton
+    - Broomfield
+    - Northglenn
+    - Commerce City
+  south:
+    - Lone Tree
+    - Greenwood Village
+    - Cherry Hills Village
+    - Littleton
+    - Englewood
+  far_south:
+    - Highlands Ranch
+    - Castle Rock
+    - Castle Pines
+    - Parker
+    - Ken Caryl
+  tech_center:
+    - Denver Tech Center (DTC)
+    - Inverness
+    - Meridian
+    - Park Meadows
+  highways:
+    - I-25
+    - I-70
+    - I-225
+    - I-270
+    - C-470
+    - E-470
+  airport:
+    - DIA (Denver International Airport)
+    - Peña Blvd
+
+local_context:
+  major_employers: "Tech companies, healthcare, aerospace"
+  notable: "Red Rocks, Coors Field, Union Station"
+  weather_note: "Winter snow and cold can cause battery issues"

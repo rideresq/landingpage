@@ -1,0 +1,71 @@
+# San Antonio, Texas - GEO Page Config
+city: San Antonio
+state: Texas
+state_abbr: TX
+metro: San Antonio Metro Area
+phone: "+1-210-XXX-XXXX"  # Update when you have a number
+timezone: Central
+
+# Pricing (adjust based on local market research)
+pricing:
+  tow_min: 95
+  tow_max: 155
+  tow_surge: 200
+  jump_min: 50
+  jump_max: 85
+  flat_min: 60
+  flat_max: 100
+  lockout_min: 55
+  lockout_max: 90
+  fuel_min: 60
+  fuel_max: 90
+
+# Response time estimate
+eta_min: 15
+eta_max: 30
+
+# Service areas - customize per city
+areas:
+  central:
+    - Downtown San Antonio
+    - River Walk
+    - Alamo Heights
+    - Monte Vista
+    - Southtown
+  north:
+    - Stone Oak
+    - Shavano Park
+    - Hollywood Park
+    - San Antonio Airport (SAT)
+  south:
+    - Brooks City Base
+    - Mission District
+    - Southside
+  east:
+    - Kirby
+    - Windcrest
+    - Converse
+    - Universal City
+  west:
+    - Helotes
+    - Leon Valley
+    - Lackland AFB area
+  suburbs:
+    - New Braunfels
+    - Schertz
+    - Cibolo
+    - Selma
+    - Live Oak
+    - Boerne
+  highways:
+    - I-10
+    - I-35
+    - I-410 (Loop 410)
+    - US-281
+    - Loop 1604
+
+# Local context for content
+local_context:
+  major_employers: "USAA, Valero, H-E-B headquarters"
+  notable: "Fiesta Texas, The Rim, La Cantera"
+  weather_note: "Texas heat can drain batteries fast"
