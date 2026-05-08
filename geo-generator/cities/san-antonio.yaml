@@ -3,7 +3,8 @@ city: San Antonio
 state: Texas
 state_abbr: TX
 metro: San Antonio Metro Area
-phone: "+1-210-XXX-XXXX"  # Update when you have a number
+phone: "+1-844-789-7377"
+phone_display: "1-844-789-RESQ"
 timezone: Central
 
 # Pricing (adjust based on local market research)
